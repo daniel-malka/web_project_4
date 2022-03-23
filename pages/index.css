@@ -1,4 +1,5 @@
 @import "../vendor/normalize.css";
+@import "../blocks/body.css";
 @import "../blocks/page.css";
 @import "../blocks/top.css";
 @import "../blocks/header.css";
