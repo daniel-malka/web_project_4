@@ -1,0 +1,7 @@
+.images {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 742px;
+  border: 1px solid white;
+}

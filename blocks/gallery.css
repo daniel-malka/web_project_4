@@ -1,0 +1,10 @@
+.gallery {
+  box-sizing: border-box;
+  border: 1px solid white;
+  row-gap: 99px;
+  column-gap: 17px;
+}
+.gallery__img {
+  width: 282px;
+  height: 282px;
+}

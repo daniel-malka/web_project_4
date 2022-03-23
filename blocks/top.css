@@ -1,0 +1,12 @@
+.top {
+  box-sizing: border-box;
+  width: 880px;
+  min-height: 74px;
+  display: flex;
+  margin-bottom: 41px;
+  border-bottom: 1px solid #545454;
+}
+.top__logo {
+  max-width: 173px;
+  height: 33px;
+}
