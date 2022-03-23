@@ -1,0 +1,9 @@
+.footer {
+  display: flex;
+  width: 880px;
+}
+.footer__text {
+  justify-self: flex-start;
+  padding-bottom: 60px;
+  color: #545454;
+}
