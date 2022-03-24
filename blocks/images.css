@@ -1,7 +1,5 @@
 .images {
-  box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
+  box-sizing: border-box;
   min-height: 742px;
-  border: 1px solid white;
 }

@@ -25,7 +25,6 @@
 
 .gallery__img {
   box-sizing: border-box;
-
   border-radius: 10px 10px 0 0;
   width: 282px;
   height: 282px;
@@ -78,6 +77,32 @@
   }
   .desc {
     width: 100%;
+  }
+  .desc__text {
+    width: max-content;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .desc__text {
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .gallery {
+    grid-template: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  .gallery__img {
+    width: calc(100vw - 38px);
+  }
+  .desc {
+    width: calc(100vw - 38px);
   }
   .desc__text {
     width: max-content;

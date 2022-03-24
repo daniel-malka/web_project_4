@@ -16,3 +16,18 @@
     padding-left: 27px;
   }
 }
+
+@media screen and (max-width: 880px) {
+  .top {
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 550px) {
+  .top {
+    margin-bottom: 42px;
+  }
+  .top__logo {
+    width: 126px;
+    height: 24px;
+  }
+}
