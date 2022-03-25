@@ -1,24 +1,31 @@
-.form {
-  visibility: hidden;
-  position: absolute;
-  top: 35px;
-  left: 225px;
+.popup {
+  visibility: visible;
+  position: fixed;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 1;
+  padding: 0 19px;
+}
+
+.popup__content {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 36px 36px 36px;
   width: 430px;
   height: 330px;
   background-color: #fff;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
   border-radius: 10px;
-  padding: 34px 36px 36.51px 34px;
 }
-.form::after {
-  content: "";
+.popup__content::after {
   position: absolute;
-  top: -48px;
-  right: -48px;
+  content: "";
+  top: -40px;
+  right: -40px;
   background-image: url("../images/close-X.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -26,9 +33,15 @@
   height: 45px;
   z-index: 2;
 }
+.popup__content:hover::after {
+  cursor: pointer;
+  opacity: 0.8;
+}
 
 .form__title {
+  color: #000;
   box-sizing: border-box;
+  max-width: 358px;
   font-size: 24px;
   margin-block-start: 0;
   margin-block-end: 0;
@@ -45,6 +58,7 @@
   padding-block-start: 0;
   padding-inline-start: 0;
   padding-inline-end: 0;
+  width: 100%;
   padding-block-end: 0;
   min-inline-size: none;
   border: none;
@@ -53,22 +67,23 @@
 }
 .form__input {
   box-sizing: border-box;
-  width: 358px;
+  width: 100%;
   margin-bottom: 30px;
   border-width: 0 0 1px 0;
-  padding-bottom: 13.35px;
   border-color: rgba(0, 0, 0, 0.2);
 }
 input:focus {
   outline: 0;
 }
 input[type="text" i] {
-  padding: 0;
+  padding-bottom: 13.26px;
 }
-
+.form__label {
+  display: block;
+}
 .form__save {
   margin-top: 18px;
-  width: 358px;
+  width: 100%;
   height: 50px;
   background-color: #000;
   color: #fff;
@@ -77,9 +92,34 @@ input[type="text" i] {
   text-align: center;
   border-radius: 2px;
   border-width: 0;
-  padding: 0;
 }
-.form__label {
-  display: block;
-  text-align: left;
+.form__save:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 550px) {
+  .popup__content {
+    width: 282px;
+    padding: 25px 22px;
+  }
+  .popup__content::after {
+    top: -45px;
+    right: 5px;
+    width: 26px;
+    height: 26px;
+  }
+  .form__title {
+    font-size: 18px;
+    margin-bottom: 76px;
+  }
+  .form__input {
+    font-size: 14px;
+  }
+  input[type="text" i] {
+    padding-bottom: 9px;
+  }
+  .form__save {
+    margin-top: 18px;
+  }
 }

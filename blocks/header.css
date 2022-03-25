@@ -46,6 +46,10 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.text__name:hover::after {
+  cursor: pointer;
+  opacity: 0.6;
+}
 .text__occu {
   position: relative;
   box-sizing: border-box;
@@ -72,6 +76,10 @@
   background-repeat: no-repeat;
 }
 
+.text__occu:hover::after {
+  cursor: pointer;
+  opacity: 0.6;
+}
 @media screen and (max-width: 910px) {
   .header {
     padding: 0 19px;
