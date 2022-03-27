@@ -4,7 +4,7 @@
   min-height: 74px;
   display: flex;
   margin-bottom: 40px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.5);
   z-index: -1;
 }
 .top__logo {
@@ -24,5 +24,12 @@
   .top__logo {
     width: 126px;
     height: 24px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .top {
+    margin-bottom: 42px;
+    min-height: 56px;
   }
 }
