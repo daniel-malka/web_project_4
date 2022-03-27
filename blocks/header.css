@@ -33,7 +33,7 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-.text__name::after {
+.text__edit {
   position: absolute;
   box-sizing: border-box;
   top: 14px;
@@ -46,7 +46,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.text__name:hover::after {
+.text__edit:hover {
   cursor: pointer;
   opacity: 0.6;
 }
