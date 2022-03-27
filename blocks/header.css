@@ -21,6 +21,10 @@
   padding-top: 22px;
   row-gap: 16px;
 }
+.text__title {
+  display: flex;
+  column-gap: 18px;
+}
 .text__name {
   position: relative;
   color: white;
@@ -34,12 +38,9 @@
   margin-inline-end: 0;
 }
 .text__edit {
-  position: absolute;
   box-sizing: border-box;
-  top: 14px;
-  right: -42px;
   border: 1px solid white;
-  content: "";
+  align-self: end;
   width: 24px;
   height: 24px;
   background-image: url("../images/pen.svg");
@@ -62,13 +63,12 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-.text__occu::after {
-  content: "";
+.plusBox {
   position: absolute;
-  right: -382.094px;
-  top: -42px;
+  right: 0;
   border: 1px solid white;
   box-sizing: border-box;
+  align-self: center;
   width: 150px;
   height: 50px;
   background-image: url("../images/plus.svg");
@@ -76,18 +76,13 @@
   background-repeat: no-repeat;
 }
 
-.text__occu:hover::after {
+.plusBox:hover {
   cursor: pointer;
   opacity: 0.6;
 }
 @media screen and (max-width: 910px) {
   .header {
     padding: 0 19px;
-  }
-
-  .text__occu::after {
-    left: 239px;
-    top: -7px;
   }
 }
 
@@ -108,17 +103,9 @@
     font-size: 32px;
     line-height: 37px;
   }
-  .text__name::after {
-    top: 4;
-  }
   .text__occu {
     font-size: 14px;
     line-height: 16.94px;
-  }
-
-  .text__occu::after {
-    left: 158.154px;
-    top: -7px;
   }
 }
 
@@ -126,7 +113,6 @@
   .header {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 218.498px;
   }
   .header__img {
     margin-bottom: 30px;
@@ -139,18 +125,7 @@
     line-height: 26.63px;
     height: fit-content;
   }
-  .text__name::after {
-    width: 18px;
-    height: 18px;
-    top: 4px;
-    left: 208px;
-  }
   .text__occu {
     text-align: center;
-  }
-  .text__occu::after {
-    width: 282px;
-    top: 58.938px;
-    left: -41px;
   }
 }

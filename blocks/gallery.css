@@ -31,8 +31,8 @@
 }
 .desc {
   box-sizing: border-box;
-  position: relative;
   border-radius: 0 0 10px 10px;
+  display: flex;
   background-color: #fff;
   width: 282px;
   height: 79px;
@@ -43,10 +43,10 @@
 
 .desc__text {
   box-sizing: border-box;
-  width: 206px;
-  font-size: 24px;
-  line-height: 29.05px;
-  font-weight: 900;
+  width: 207px;
+  font-size: 25px;
+  line-height: 30.05px;
+  font-weight: 901;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -56,15 +56,16 @@
   margin-inline-end: 0;
   padding-inline-start: 0;
 }
-.desc::after {
-  content: "";
+.like {
   width: 21px;
   height: 19px;
-  position: absolute;
-  top: 30px;
-  right: 30px;
   background-image: url("../images/like.svg");
   background-repeat: no-repeat;
+  background-position: center;
+}
+.like:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 @media screen and (max-width: 910px) {
   .gallery {

@@ -14,7 +14,6 @@
     />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="javascript" href="./script/script.js" />
 
     <title>Aroud the US.</title>
   </head>
@@ -29,8 +28,9 @@
       </header>
       <main class="content">
         <section class="popup">
-          <div class="popup__content">
-            <h3 class="form__title">Edit Profile</h3>
+          <div class="popup__container">
+            <span class="popup__close"></span>
+            <h3 class="popup__title">Edit Profile</h3>
             <form class="form">
               <fieldset class="form__type">
                 <label for="name" class="form__label"></label>
@@ -39,7 +39,7 @@
                   id="name"
                   name="name"
                   value="Jacques Cousteau"
-                  class="form__input"
+                  class="form__input-name"
                   required
                 />
                 <label for="occupation" class="form__label"></label>
@@ -48,7 +48,7 @@
                   id="occupation"
                   name="occu"
                   value="Explorer"
-                  class="form__input"
+                  class="form__input-occu"
                   required
                 />
               </fieldset>
@@ -65,9 +65,13 @@
             class="header__img"
           />
           <div class="text">
-            <h1 class="text__name">Jacques Cousteau</h1>
-            <span class="text__edit"></span>
+            <div class="text__title">
+              <h1 class="text__name">Jacques Cousteau</h1>
+              <span class="text__edit"></span>
+            </div>
+
             <p class="text__occu">Explorer</p>
+            <span class="plusBox"></span>
           </div>
         </section>
         <section class="images">
@@ -78,7 +82,10 @@
                 alt="Kenai Fjords National Park, Alaska"
                 class="gallery__img"
               />
-              <span class="desc"><p class="desc__text">Kenai Fjords</p></span>
+              <div class="desc"
+                ><p class="desc__text">Kenai Fjords</p>
+                <span class="like"></span
+              ></div>
             </li>
             <li class="gallery__item">
               <img
@@ -87,8 +94,9 @@
                 class="gallery__img"
               />
               <span class="desc"
-                ><p class="desc__text">YellowStone Park</p></span
-              >
+                ><p class="desc__text">YellowStone Park</p>
+                <span class="like"></span
+              ></span>
             </li>
             <li class="gallery__item">
               <img
@@ -96,7 +104,10 @@
                 alt="Niagara Falls, New York & Ontario"
                 class="gallery__img"
               />
-              <span class="desc"><p class="desc__text">Niagara Falls</p></span>
+              <span class="desc"
+                ><p class="desc__text">Niagara Falls</p>
+                <span class="like"></span
+              ></span>
             </li>
             <li class="gallery__item">
               <img
@@ -104,7 +115,10 @@
                 alt="Zion National Park, Utah"
                 class="gallery__img"
               />
-              <span class="desc"><p class="desc__text">Zion Park</p></span>
+              <span class="desc"
+                ><p class="desc__text">Zion Park</p>
+                <span class="like"></span
+              ></span>
             </li>
             <li class="gallery__item">
               <img
@@ -112,7 +126,10 @@
                 alt="Kauai islands, Hawaii"
                 class="gallery__img"
               />
-              <span class="desc"><p class="desc__text">Kauai, Hawaii</p></span>
+              <span class="desc"
+                ><p class="desc__text">Kauai, Hawaii</p>
+                <span class="like"></span
+              ></span>
             </li>
             <li class="gallery__item">
               <img
@@ -120,7 +137,10 @@
                 alt="Grand Canyon, Arizona"
                 class="gallery__img"
               />
-              <span class="desc"><p class="desc__text">Grand Canyon</p></span>
+              <span class="desc"
+                ><p class="desc__text">Grand Canyon</p>
+                <span class="like"></span
+              ></span>
             </li>
           </ul>
         </section>
