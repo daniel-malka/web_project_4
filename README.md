@@ -1,4 +1,5 @@
-around US
+project name: "Around US".
+--description--
 photo gallery of most visited outdoor places in United states
 this website uses html, css, and javascript.
 

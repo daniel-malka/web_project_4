@@ -28,7 +28,7 @@
 
 .desc__text {
   box-sizing: border-box;
-  width: 207px;
+  max-width: 207px;
   font-size: 25px;
   line-height: 30.05px;
   font-weight: 901;
@@ -61,24 +61,24 @@
     width: max(100%, 282px);
   }
   .desc__text {
-    width: max-content;
+    max-width: max-content;
   }
 }
 
 @media screen and (max-width: 680px) {
   .desc__text {
-    width: 180px;
+    max-width: 180px;
   }
 }
 
 @media screen and (max-width: 620px) {
   .desc__text {
-    width: max-content;
+    max-width: max-content;
   }
 }
 
 @media screen and (max-width: 450px) {
   .desc__text {
-    width: 210px;
+    max-width: 210px;
   }
 }

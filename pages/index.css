@@ -5,7 +5,8 @@
 @import "../blocks/pop/pop.css";
 @import "../blocks/pop/__container/container.css";
 @import "../blocks/top.css";
-@import "../blocks/header.css";
+@import "../blocks/header/header.css";
+@import "../blocks/header/text/text.css";
 @import "../blocks/images/images.css";
 @import "../blocks/images/gallery/gallery.css";
 @import "../blocks/images/gallery/__item/__item.css";

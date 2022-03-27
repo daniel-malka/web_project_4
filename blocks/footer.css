@@ -12,8 +12,9 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 500px) {
   .footer__text {
     padding-left: 19px;
+    padding-bottom: 36px;
   }
 }
