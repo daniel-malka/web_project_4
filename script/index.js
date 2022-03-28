@@ -1,6 +1,7 @@
 const openformButton = document.querySelector(".text__edit");
 const closeformButton = document.querySelector(".popup__close");
 const popup = document.querySelector(".popup");
+const popForm = document.getElementById("form");
 
 let nameInput = document.querySelector(".form__input-name");
 let occupationInput = document.querySelector(".form__input-occu");
@@ -22,4 +23,4 @@ function submitForm(e) {
 
 openformButton.addEventListener("click", toggleform);
 closeformButton.addEventListener("click", toggleform);
-popup.addEventListener("submit", submitForm);
+popForm.addEventListener("submit", submitForm);
