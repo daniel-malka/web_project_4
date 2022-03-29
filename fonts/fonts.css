@@ -7,17 +7,11 @@
 
 @font-face {
   font-family: "Inter";
-  font-weight: 600;
-  src: url("./Inter-SemiBold.woff") format("woff"),
-    url("./Inter-SemiBold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
   font-weight: 500;
   src: url("./Inter-Medium.woff") format("woff"),
     url("./Inter-Medium.woff2") format("woff2");
 }
+
 @font-face {
   font-family: "Inter";
   font-weight: 400;

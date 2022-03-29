@@ -19,11 +19,10 @@
   justify-content: space-between;
   background-color: #fff;
   width: 282px;
-  height: 79px;
+  min-height: 79px;
   padding-left: 21px;
   padding-top: 25px;
   padding-right: 30px;
-  z-index: -1;
 }
 
 .desc__text {
@@ -41,7 +40,7 @@
   margin-inline-end: 0;
   padding-inline-start: 0;
 }
-.like {
+.desc__button_type_like {
   width: 21px;
   height: 19px;
   background-image: url("../images/like.svg ");
@@ -49,8 +48,9 @@
   background-position: center;
   background-color: #fff;
 }
-.like:hover {
-  opacity: 0.6;
+
+.desc__button_type_like:hover {
+  opacity: 0.5;
   cursor: pointer;
 }
 @media screen and (max-width: 910px) {
@@ -68,12 +68,6 @@
 @media screen and (max-width: 680px) {
   .desc__text {
     max-width: 180px;
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .desc__text {
-    max-width: max-content;
   }
 }
 

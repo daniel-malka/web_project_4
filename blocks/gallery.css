@@ -3,7 +3,6 @@
   grid-template: auto auto / auto auto auto;
   box-sizing: border-box;
   max-width: 880px;
-  min-height: 742px;
   row-gap: 20px;
   column-gap: 17px;
   list-style-type: none;
@@ -12,7 +11,7 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-inline-start: 0;
-  margin-bottom: 67px;
+  margin-bottom: 68px;
   list-style-type: none;
 }
 @media screen and (max-width: 910px) {
