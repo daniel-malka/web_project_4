@@ -17,6 +17,7 @@
 }
 @media screen and (max-width: 500px) {
   .footer__text {
+    font-size: 14px;
     padding-left: 19px;
     padding-bottom: 36px;
   }

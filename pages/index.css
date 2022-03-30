@@ -2,13 +2,14 @@
 @import "../blocks/body.css";
 @import "../blocks/page.css";
 @import "../blocks/content.css";
-@import "../blocks/pop.css";
+@import "../blocks/popup.css";
+@import "../blocks/form.css";
 @import "../blocks/container.css";
 @import "../blocks/top.css";
 @import "../blocks/header.css";
 @import "../blocks/text.css";
 @import "../blocks/images.css";
 @import "../blocks/gallery.css";
-@import "../blocks/item.css";
+@import "../blocks/desc.css";
 @import "../blocks/footer.css";
 @import "../fonts/fonts.css";
