@@ -28,7 +28,7 @@
   border: 1px solid white;
   align-self: center;
   min-width: 24px;
-  height: 24px;
+  min-height: 24px;
   background-image: url("../images/pen.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -54,7 +54,9 @@
 
 @media screen and (max-width: 680px) {
   .text__name {
+    max-width: 270px;
     font-size: 32px;
+
     line-height: 37px;
   }
   .text__occu {
@@ -73,12 +75,16 @@
   }
   .text__button_type_edit {
     align-self: flex-start;
+    min-width: 18px;
+    min-height: 18px;
   }
   .text__name {
-    font-size: 24px;
+    max-width: 196px;
+    font-size: 22px;
     line-height: 26.63px;
   }
   .text__occu {
     text-align: center;
+    max-width: 282px;
   }
 }
