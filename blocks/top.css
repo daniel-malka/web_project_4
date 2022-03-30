@@ -11,7 +11,7 @@
   max-height: 120px;
   margin-right: 30px;
 }
-.top__button_type_plusBox {
+.top__plus-box {
   border: 2px solid white;
   position: relative;
   box-sizing: border-box;
@@ -25,7 +25,7 @@
   transition-duration: 500ms;
 }
 
-.top__button_type_plusBox:hover {
+.top__plus-box:hover {
   cursor: pointer;
   opacity: 0.6;
 }
@@ -36,7 +36,7 @@
 }
 
 @media screen and (max-width: 775px) {
-  .top__button_type_plusBox {
+  .top__plus-box {
     width: 50px;
     height: 100px;
   }
@@ -51,7 +51,7 @@
     margin-right: 0;
     margin-bottom: 30px;
   }
-  .top__button_type_plusBox {
+  .top__plus-box {
     width: 282px;
     height: 50px;
   }

@@ -11,6 +11,6 @@
   top: 0;
   left: 0;
 }
-.is__open {
+.popup__modifier_type_open {
   display: flex;
 }
