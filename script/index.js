@@ -37,4 +37,5 @@ for (let i = 0; i < likeButton.length; i++) {
     like.classList.toggle("desc__button_type_is-liked");
   };
   like.addEventListener("click", liked);
+  
 }

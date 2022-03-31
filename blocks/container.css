@@ -18,6 +18,8 @@
   background-repeat: no-repeat;
   width: 45px;
   height: 45px;
+  border-width: 0;
+  background-color: transparent;
 }
 
 .popup__button_type_close:hover {

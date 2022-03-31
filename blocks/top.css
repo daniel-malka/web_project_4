@@ -20,6 +20,7 @@
   height: 50px;
   background-image: url("../images/plus.svg");
   background-position: center;
+  background-color: #000;
   background-repeat: no-repeat;
   border-radius: 2px;
   transition-duration: 500ms;
