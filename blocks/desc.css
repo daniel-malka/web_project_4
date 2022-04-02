@@ -27,7 +27,7 @@
   padding-bottom: 31px;
 }
 
-.desc__button_type_like {
+.button_like {
   width: 21px;
   height: 19px;
   background-image: url("../images/like.svg");
@@ -37,11 +37,11 @@
   border-width: 0;
   transition-duration: 350ms;
 }
-.desc__button_type_is-liked {
+.button_liked {
   background-image: url("../images/like_black.svg");
 }
 
-.desc__button_type_like:hover {
+.button_like:hover {
   opacity: 0.5;
   cursor: pointer;
 }
