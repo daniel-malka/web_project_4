@@ -25,7 +25,7 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
-.button_close {
+.popup__button {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -38,7 +38,7 @@
   background-color: transparent;
 }
 
-.button_close:hover {
+.popup__button:hover {
   cursor: pointer;
   opacity: 0.6;
 }
@@ -61,7 +61,7 @@
     width: 282px;
     padding: 25px 22px;
   }
-  .button_close {
+  .popup__button {
     top: -45px;
     right: 5px;
     width: 26px;
