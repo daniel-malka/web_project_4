@@ -1,5 +1,5 @@
 const openformButton = document.querySelector(".text__edit");
-const closeformButton = document.querySelector(".button_close");
+const closeformButton = document.querySelector(".popup__button_close");
 const popup = document.querySelector(".popup");
 const popForm = document.getElementById("form");
 
@@ -22,14 +22,14 @@ const submitForm = (e) => {
   e.preventDefault();
   textName.textContent = nameInput.value;
   occupation.textContent = occupationInput.value;
-  popup.classList.remove("popup__modifier_type_open");
+  popup.classList.remove("popup_open");
 };
 
 openformButton.addEventListener("click", openform);
 closeformButton.addEventListener("click", closeform);
 popForm.addEventListener("submit", submitForm);
 
-const likeButton = document.querySelectorAll(".button_like");
+const likeButton = document.querySelectorAll(".desc__button_like");
 
 for (let i = 0; i < likeButton.length; i++) {
   let like = likeButton[i];
