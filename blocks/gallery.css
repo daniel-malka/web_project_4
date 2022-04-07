@@ -15,6 +15,7 @@
   list-style-type: none;
 }
 .gallery__item {
+  position: relative;
   box-sizing: border-box;
   text-decoration: none;
   display: flex;
@@ -28,7 +29,20 @@
   height: 282px;
   object-fit: cover;
 }
-
+.gallery__bin {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  height: 19.3px;
+  width: 18px;
+  background: url("../images/bin.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.gallery__bin:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
 @media screen and (max-width: 910px) {
   .gallery {
     padding: 0 19px;
