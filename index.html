@@ -26,12 +26,15 @@
         />
       </header>
       <main class="content">
+        <sction class="zoom">
+          <img src="" alt="" class="zoom__img">
+        </sction>
         <section class="popup">
           <div class="popup__container">
             <button
               type="button"
               aria-label="button"
-              class="popup__button"
+              class="popup__close"
             ></button>
             <h3 class="popup__title">Edit Profile</h3>
             <form name="form" class="form" id="form">
@@ -59,39 +62,7 @@
             </form>
           </div>
         </section>
-        <section class="plusPopup">
-          <div class="plusPopup__container">
-            <button
-              type="button"
-              aria-label="button"
-              class="plusPopup__button"
-            ></button>
-            <h3 class="plusPopup__title">New place</h3>
-            <div class="plusPopup__type">
-              <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Title"
-                value=""
-                class="plusPopup__input plusPopup__input_type_title"
-                required
-              />
-              <input
-                type="text"
-                id="image-link"
-                name="link"
-                value=""
-                placeholder="Image link"
-                class="plusPopup__input plusPopup__input_type_link"
-                required
-              />
-            </div>
-            <div class="plusPopup__type">
-              <button type="submit" class="plusPopup__button-create">create</button>
-            </div>
-          </div>
-        </section>
+
         <section class="top">
           <img
             src="./images/header__img.png"
@@ -116,106 +87,7 @@
           ></button>
         </section>
         <section class="images">
-          <ul class="gallery">
-            <li class="gallery__item">
-              <img
-                src="./images/KenaiFjords.jpg"
-                alt="Kenai Fjords National Park, Alaska"
-                class="gallery__img"
-              />
-              <span class="gallery__bin"></span>
-
-              <div class="desc">
-                <h2 class="desc__text">Kenai Fjords</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li>
-            <li class="gallery__item">
-              <img
-                src="./images/YellowStone2.jpg"
-                alt="Yellowstone National Park, Wyoming"
-                class="gallery__img"
-              />
-              <div class="desc">
-                <h2 class="desc__text">YellowStone Park</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li>
-            <li class="gallery__item">
-              <img
-                src="./images/niagra_falls2.jpg"
-                alt="Niagara Falls, New York & Ontario"
-                class="gallery__img"
-              />
-              <div class="desc">
-                <h2 class="desc__text">Niagara Falls</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li>
-            <!--  <li class="gallery__item">
-              <img
-                src="./images/zion_Park2.jpg"
-                alt="Zion National Park, Utah"
-                class="gallery__img"
-              />
-              <div class="desc">
-                <h2 class="desc__text">Zion Park</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li>
-            <li class="gallery__item">
-              <img
-                src="./images/kauaii.jpg"
-                alt="Kauai islands, Hawaii"
-                class="gallery__img"
-              />
-              <div class="desc">
-                <h2 class="desc__text">Kauai, Hawaii</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li>
-            <li class="gallery__item">
-              <img
-                src="./images/GrandCanyon.jpg"
-                alt="Grand Canyon, Arizona"
-                class="gallery__img"
-              />
-              <div class="desc">
-                <h2 class="desc__text">Grand Canyon</h2>
-                <button
-                  type="button"
-                  aria-label="button"
-                  id="like"
-                  class="desc__button"
-                ></button>
-              </div>
-            </li> -->
-          </ul>
+          <ul class="gallery"></ul>
         </section>
       </main>
       <footer class="footer">
@@ -224,7 +96,7 @@
     </div>
     <template id="gallery__item">
       <li class="gallery__item">
-        <img src="" alt="" class="gallery__img" />
+        <img src alt="" class="gallery__img" />
         <span class="gallery__bin"></span>
         <div class="desc">
           <h2 class="desc__text"></h2>
@@ -232,7 +104,7 @@
             type="button"
             aria-label="button"
             id="like"
-            class="desc__button"
+            class="desc__heart"
           ></button>
         </div>
       </li>

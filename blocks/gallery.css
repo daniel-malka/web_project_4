@@ -20,6 +20,7 @@
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  transition-duration: 500ms;
 }
 
 .gallery__img {

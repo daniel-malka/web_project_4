@@ -27,7 +27,7 @@
   padding-bottom: 31px;
 }
 
-.desc__button {
+.desc__heart {
   width: 21px;
   height: 19px;
   background-image: url("../images/like.svg");
@@ -41,7 +41,7 @@
   background-image: url("../images/like_black.svg");
 }
 
-.desc__button:hover {
+.desc__heart:hover {
   opacity: 0.5;
   cursor: pointer;
 }
