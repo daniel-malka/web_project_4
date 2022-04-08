@@ -2,15 +2,15 @@
 
 const popForm = document.querySelector("form");
 
-//pop box toggle target
+//popbox toggle target
 
 const popup = document.querySelector(".popup");
 
-//form buttons
+//plus box toggle target
 
-const openformButton = document.querySelector(".text__edit");
-const closeformButton = document.querySelector(".popup__button");
-
+const plusPopup = document.querySelector(".plusPopup");
+//gallery UL
+const galleryUl = document.querySelector(".gallery");
 //form inputs
 
 let nameInput = document.querySelector(".form__input_type_name");
@@ -18,7 +18,85 @@ let occupationInput = document.querySelector(".form__input_type_occu");
 let textName = document.querySelector(".text__name");
 let occupation = document.querySelector(".text__occu");
 
-//form open/close/submit
+//galleryUL/li
+
+//initial gallery
+const initialGallery = [
+  {
+    title: "Kenai Fjordlinkational Park",
+    link: "../images/KenaiFjords.jpg",
+  },
+  {
+    title: "Yellowlinkne National Park",
+    link: "../images/YellowStone2.jpg",
+  },
+  {
+    title: "Niagara Falls",
+    link: "../images/niagra_falls2.jpg",
+  },
+  {
+    title: "Zion National Park",
+    link: "../images/zion_Park2.jpg",
+  },
+  {
+    title: "Kauai islands",
+    link: "../images/kauaii.jpg",
+  },
+  {
+    title: "Grand Canyon",
+    link: "../images/GrandCanyon.jpg",
+  },
+];
+
+//form buttons
+const openformButton = document.querySelector(".text__edit");
+const closeformButton = document.querySelector(".popup__button");
+
+//plus box buttons
+const plusBoxOpen = document.querySelector(".top__plus-box");
+const plusBoxClose = document.querySelector(".plusPopup__button");
+
+//image/title inputs
+
+//image create button
+const imageAppend = () => {
+  let galleryItem = document
+    .querySelector("#gallery__item")
+    .content.querySelector(".gallery__item");
+  let galleryElement = galleryItem.cloneNode(true);
+  let itemTitle = galleryElement.querySelector(".desc__text");
+  let itemImage = galleryElement.querySelector(".gallery__img");
+  let titleInput = document.querySelector(".plusPopup__input_type_title");
+  let linkInput = document.querySelector(".plusPopup__input_type_link");
+  itemImage.src = linkInput.value;
+  itemTitle.textContent = titleInput.value;
+  galleryUl.prepend(galleryElement);
+  imageAppendClose();
+};
+//loop: gllery initial items
+initialGallery.forEach((i) => {
+  const galleryItem = document
+    .querySelector("#gallery__item")
+    .content.querySelector(".gallery__item");
+
+  //this f iterates appends each template li to ul
+  const galleryElement = galleryItem.cloneNode(true);
+  let itemTitle = galleryElement.querySelector(".desc__text");
+  let itemImage = galleryElement.querySelector(".gallery__img");
+
+  itemImage.src = i.link;
+  itemTitle.textContent = i.title;
+  galleryUl.append(galleryElement);
+});
+
+//like buttons
+const likeButton = document.querySelectorAll(".desc__button");
+const addImageButton = document.querySelector(".plusPopup__button-create");
+
+// const imageRemove;
+// this function needs to delete the target's.parent
+
+//function: form open/close/submit
 const openform = () => {
   nameInput.value = textName.textContent;
   occupationInput.value = occupation.textContent;
@@ -36,29 +114,7 @@ const submitForm = (e) => {
   popup.classList.remove("popup_open");
 };
 
-//event listeners form
-openformButton.addEventListener("click", openform);
-
-closeformButton.addEventListener("click", closeform);
-
-popForm.addEventListener("submit", submitForm);
-
-//plus box buttons
-
-const plusBoxOpen = document.querySelector(".top__plus-box");
-const plusBoxClose = document.querySelector(".plusPopup__button");
-
-//plus box toggle target
-
-const plusPopup = document.querySelector(".plusPopup");
-
-//image/title inputs
-
-let titleInput = document.querySelector(".title__input_type_title");
-let linkInput = document.querySelector(".link__input_type_link");
-//image create
-const addImageButton = document.querySelector(".plusPopup__button-create");
-//image pop open/close
+//function:image pop open/close
 
 const imageAppendOpen = () => {
   plusPopup.classList.add("plusPopup_open");
@@ -67,21 +123,19 @@ const imageAppendOpen = () => {
 const imageAppendClose = () => {
   plusPopup.classList.remove("plusPopup_open");
 };
-// const imageAppend;
-//this function needs to:
-// 1 append an li.gallery__item to ul.gallery
-// 2 take the titleInput and set it = to .desc__text
-// 3 take the linkInput set it to .gallery__img.src
-//event listener plus box
-// const imageRemove;
-// this function needs to delete the target's.parent
+
+//form event listeners
+openformButton.addEventListener("click", openform);
+
+closeformButton.addEventListener("click", closeform);
+
+popForm.addEventListener("submit", submitForm);
+
+//plus boxevent listener
 
 plusBoxOpen.addEventListener("click", imageAppendOpen);
 plusBoxClose.addEventListener("click", imageAppendClose);
-addImageButton.addEventListener("click");
-//like buttons
-
-const likeButton = document.querySelectorAll(".desc__button");
+addImageButton.addEventListener("click", imageAppend);
 
 //like event listener
 
