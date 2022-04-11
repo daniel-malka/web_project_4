@@ -27,12 +27,12 @@ let occupationInput = document.querySelector(".form__input_type_occu");
 let Gallery = [
   {
     title: "Kenai Fjords interational Park",
-    link: "../images/KenaiFjords.jpg",
+    link: "",
     alt: "frozen lake, Kenai Fjords",
   },
   {
     title: "Yellowlinkne National Park",
-    link: "../images/YellowStone2.jpg",
+    link: "",
     alt: "hot springs view Yellowstone park",
   },
   {
@@ -42,17 +42,17 @@ let Gallery = [
   },
   {
     title: "Zion National Park",
-    link: "../images/zion_Park2.jpg",
+    link: "",
     alt: "deset hill zion park",
   },
   {
     title: "Kauai islands",
-    link: "../images/kauaii.jpg",
+    link: "",
     alt: "kauai horizon view",
   },
   {
     title: "Grand Canyon",
-    link: "../images/GrandCanyon.jpg",
+    link: "",
     alt: "grand canyon desert view",
   },
 ];
