@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  width: 282px;
   padding-left: 21px;
   padding-top: 25px;
   padding-right: 30px;
@@ -44,14 +43,6 @@
 .desc__heart:hover {
   opacity: 0.5;
   cursor: pointer;
-}
-@media screen and (max-width: 910px) {
-  .desc {
-    width: max(100%, 282px);
-  }
-  .desc__text {
-    max-width: max-content;
-  }
 }
 
 @media screen and (max-width: 680px) {

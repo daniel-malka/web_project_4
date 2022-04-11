@@ -64,6 +64,17 @@ Gallery.forEach((i) => {
   galleryLi.querySelector(".gallery__img").alt = i.alt;
   galleryLi.querySelector(".desc__text").textContent = i.title;
   galleryUl.append(galleryLi);
+  let galleryImg = document.querySelectorAll(".gallery__img");
+
+  galleryImg.forEach((img) => {
+    img.addEventListener("click", function (event) {
+      let zoomPop = document.querySelector(".zoom");
+      zoomPop.classList.add("zoom_open");
+      zoomPop.querySelector(".zoom__img").src = event.target.src;
+      zoomPop.querySelector(".zoom__alt").textContent =
+        event.target.parentElement.querySelector(".desc__text").textContent;
+    });
+  });
 });
 
 let itemBin = document.querySelectorAll(".gallery__bin");
@@ -73,20 +84,6 @@ itemBin.forEach((bin) => {
   });
 });
 
-//img pop
-const galleryImgAll = document.querySelectorAll(".gallery__img");
-galleryImgAll.forEach((img) => {
-  img.addEventListener("click", function (event) {
-    const zoomContent = document.querySelector(".zoom");
-    const zoomImg = document.querySelector(".zoom__img");
-    const zoomAlt = document.querySelector(".zoom__alt");
-    let itemTitle = document.querySelector(".desc__text");
-
-    zoomContent.classList.add("zoom_open");
-    zoomImg.src = event.target.src;
-    zoomAlt.textContent = itemTitle.textContent;
-  });
-});
 //like
 let heartLike = document.querySelectorAll(".desc__heart");
 heartLike.forEach((heart) => {
@@ -99,7 +96,7 @@ const imgToggle = () => {
   zoomPop = document.querySelector(".zoom");
   zoomPop.classList.toggle("zoom_open");
 };
-const openform = () => {
+const formOpen = () => {
   popupTitle.textContent = "Edit Profile";
   nameInput.placeholder = "";
   occupationInput.placeholder = "";
@@ -120,11 +117,9 @@ const galleryEditOpen = () => {
   occupationInput.type = "url";
   popup.classList.add("popup_open");
 };
-galleryImg.forEach((img) => {
-  img.addEventListener("click", imgOpen);
-});
-//function: popup close
-const closeform = () => {
+
+// //function: popup close
+const formClose = () => {
   popup.classList.remove("popup_open");
 };
 
@@ -133,7 +128,7 @@ let saveEdit = (e) => {
     e.preventDefault();
     textName.textContent = nameInput.value;
     occupation.textContent = occupationInput.value;
-    closeform();
+    formClose();
   } else if (saveCreate.textContent === "Create") {
     e.preventDefault();
     const galleryItem = document.querySelector("#gallery__item").content;
@@ -144,10 +139,13 @@ let saveEdit = (e) => {
     let itemTitle = galleryLi.querySelector(".desc__text");
     let itemBin = galleryLi.querySelectorAll(".gallery__bin");
     let heartLike = galleryLi.querySelectorAll(".desc__heart");
+    let itemImgAll = galleryLi.querySelectorAll(".gallery__img");
     itemTitle.textContent = nameInput.value;
     itemImage.src = occupationInput.value;
+    itemImage.alt = nameInput.value;
+
     galleryUl.prepend(galleryLi);
-    closeform();
+    formClose();
     //loops bin + heart buttons
     itemBin.forEach((bin) => {
       bin.addEventListener("click", function (event) {
@@ -160,34 +158,31 @@ let saveEdit = (e) => {
       });
     });
     //loop added img
-    const galleryImgAll = document.querySelectorAll(".gallery__img");
-    galleryImgAll.forEach((img) => {
+    itemImgAll.forEach((img) => {
       img.addEventListener("click", function (event) {
-        const zoomContent = document.querySelector(".zoom");
-        const zoomImg = document.querySelector(".zoom__img");
-        const zoomAlt = document.querySelector(".zoom__alt");
-        let itemTitle = document.querySelector(".desc__text");
+        let zoomPop = document.querySelector(".zoom");
+        zoomPop.classList.add("zoom_open");
+        zoomPop.querySelector(".zoom__img").src = event.target.src;
 
-        zoomContent.classList.add("zoom_open");
-        zoomImg.src = event.target.src;
-        zoomAlt.textContent = itemTitle.textContent;
+        zoomPop.querySelector(".zoom__alt").textContent =
+          event.target.parentElement.querySelector(".desc__text").textContent;
       });
     });
   }
 };
-const closeME = (event) => {
+const galleryEditClose = (event) => {
   if (event.target === zoomPop) {
     zoomPop.classList.remove("zoom_open");
   } else if (event.target === popup) {
-    closeform();
+    formClose();
   }
 };
 // listeners
 saveCreate.addEventListener("click", saveEdit);
-editButton.addEventListener("click", openform);
+editButton.addEventListener("click", formOpen);
 plusBoxOpen.addEventListener("click", galleryEditOpen);
-closeEditButton.addEventListener("click", closeform);
+closeEditButton.addEventListener("click", formClose);
 
 zoomClose.addEventListener("click", imgToggle);
-popup.addEventListener("click", closeME);
-zoomPop.addEventListener("click", closeME);
+popup.addEventListener("click", galleryEditClose);
+zoomPop.addEventListener("click", galleryEditClose);
