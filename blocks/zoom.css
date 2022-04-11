@@ -22,20 +22,21 @@
   position: relative;
 }
 .zoom__img {
+  position: relative;
+  top: 30px;
   width: 75vw;
-  height: 75vh;
+  height: 70vh;
   box-sizing: border-box;
   object-fit: cover;
 }
 .zoom__close {
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -10px;
   background-image: url("../images/close-X.svg");
   background-position: center;
   background-repeat: no-repeat;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-width: 0;
   background-color: transparent;
 }
@@ -56,22 +57,16 @@
     width: 100vw;
   }
   .zoom__close {
-    top: -45px;
-    right: 5px;
-    width: 26px;
-    height: 26px;
+    top: -13.3px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .zoom__img {
-    width: calc(100vw - 32px);
-    height: 400px
-  }
-  .zoom__close {
-    top: -45px;
-    right: 5px;
-    width: 26px;
-    height: 26px;
+    width: 300px;
+    height: 75vh;
   }
 }
