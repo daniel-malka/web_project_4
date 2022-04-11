@@ -7,24 +7,24 @@ const closeEditButton = document.querySelector(".popup__close");
 const zoomClose = document.querySelector(".zoom__close");
 const plusBoxClose = document.querySelector(".popup__close");
 //close popup targets
-let popup = document.querySelector(".popup");
+const popup = document.querySelector(".popup");
 let zoomPop = document.querySelector(".zoom");
 
 //sumbit popup
-let saveCreate = document.querySelector(".form__button");
+const saveCreate = document.querySelector(".form__button");
 
 //gallery referance
-let galleryUl = document.querySelector(".gallery");
-let galleryLi = document.querySelector(".gallery__item");
-let galleryImg = document.querySelectorAll(".gallery__img");
+const galleryUl = document.querySelector(".gallery");
+const galleryLi = document.querySelector(".gallery__item");
+const galleryImg = document.querySelectorAll(".gallery__img");
 
-let popupTitle = document.querySelector(".popup__title");
-let textName = document.querySelector(".text__name");
-let occupation = document.querySelector(".text__occu");
-let nameInput = document.querySelector(".form__input_type_name");
-let occupationInput = document.querySelector(".form__input_type_occu");
+const popupTitle = document.querySelector(".popup__title");
+const textName = document.querySelector(".text__name");
+const occupation = document.querySelector(".text__occu");
+const nameInput = document.querySelector(".form__input_type_name");
+const occupationInput = document.querySelector(".form__input_type_occu");
 
-let Gallery = [
+const Gallery = [
   {
     title: "Kenai Fjords interational Park",
     link: "https://images.unsplash.com/photo-1633967920376-33b2d94f091f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
@@ -160,7 +160,7 @@ let saveEdit = (e) => {
     //loop added img
     itemImgAll.forEach((img) => {
       img.addEventListener("click", function (event) {
-        let zoomPop = document.querySelector(".zoom");
+        const zoomPop = document.querySelector(".zoom");
         zoomPop.classList.add("zoom_open");
         zoomPop.querySelector(".zoom__img").src = event.target.src;
 
