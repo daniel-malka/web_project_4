@@ -58,7 +58,7 @@
   }
   .zoom__close {
     top: -13.3px;
-    right: 10px;
+    right: 20px;
     width: 30px;
     height: 30px;
   }
@@ -68,5 +68,8 @@
   .zoom__img {
     width: 300px;
     height: 75vh;
+  }
+  .zoom__close {
+    right: 20px;
   }
 }
