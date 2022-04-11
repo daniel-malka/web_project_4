@@ -27,12 +27,12 @@ let occupationInput = document.querySelector(".form__input_type_occu");
 let Gallery = [
   {
     title: "Kenai Fjords interational Park",
-    link: "../images/KenaiFjords.jpg",
+    link: "https://images.unsplash.com/photo-1633967920376-33b2d94f091f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     alt: "frozen lake, Kenai Fjords",
   },
   {
     title: "Yellowlinkne National Park",
-    link: "../images/YellowStone2.jpg",
+    link: "https://images.unsplash.com/photo-1607550295261-851fa60d8ed2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
     alt: "hot springs view Yellowstone park",
   },
   {
@@ -42,17 +42,17 @@ let Gallery = [
   },
   {
     title: "Zion National Park",
-    link: "../images/zion_Park2.jpg",
+    link: "https://images.unsplash.com/photo-1502746663084-14b59b6924f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     alt: "deset hill zion park",
   },
   {
     title: "Kauai islands",
-    link: "../images/kauaii.jpg",
+    link: "https://images.unsplash.com/photo-1638401604765-47daaa5a6c34?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=781&q=80",
     alt: "kauai horizon view",
   },
   {
     title: "Grand Canyon",
-    link: "../images/GrandCanyon.jpg",
+    link: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80",
     alt: "grand canyon desert view",
   },
 ];
