@@ -65,17 +65,19 @@ const initialGallery = [
     alt: "grand canyon desert view",
   },
 ];
-
-//cards conter
-let isExecutedSixTimes = 1;
-
-const openPopup = (type) => {
-  type.classList.add("popup_open");
-  if (type === imgViewPopup) {
-    type.classList.add("zoom_open");
-  }
+//open popupps
+const openPopup = (popup) => {
+  popup.classList.add("popup_open");
 };
 
+const openImgviewPopup = () => {
+  imgViewPopup.classList.add("zoom_open");
+};
+//rendercard
+const renderCard = (card) => {
+  galleryContent.prepend(card);
+};
+//create card
 const createCard = (card) => {
   const galleryItem = galleryTemplate
     .querySelector(".gallery__item")
@@ -86,10 +88,9 @@ const createCard = (card) => {
   galleryImg.addEventListener("click", (event) => {
     imgViewContent.src = event.target.src;
     imgViewContent.alt = event.target.alt;
-
     imgViewParagraph.textContent =
       event.target.parentElement.querySelector(".desc__text").textContent;
-    openPopup(imgViewPopup);
+    openImgviewPopup();
   });
   //card remover
   galleryItem
@@ -103,48 +104,44 @@ const createCard = (card) => {
     .addEventListener("click", function (event) {
       event.target.classList.toggle("button_liked");
     });
-
-  if (isExecutedSixTimes <= 6) {
-    galleryText.textContent = card.title;
-    galleryImg.src = card.link;
-    galleryImg.alt = card.alt;
-    galleryContent.append(galleryItem);
-  } else if (isExecutedSixTimes > 6) {
-    galleryImg.src = linkInput.value;
-    galleryImg.alt = `your input: ${titleInput.value}`;
-    galleryText.textContent = titleInput.value;
-    galleryContent.prepend(galleryItem);
-  }
+  galleryText.textContent = card.title;
+  galleryImg.src = card.link;
+  galleryImg.alt = card.alt;
+  renderCard(galleryItem);
 };
+
 //initial cards
 initialGallery.forEach((card) => {
   createCard(card);
-  isExecutedSixTimes += 1;
 });
 
 /////////////////////////////
 ///////////functions/////////
 //close popup func
-const closePopup = (type) => {
-  type.classList.remove("popup_open");
-  if (type === imgViewPopup) {
-    type.classList.remove("zoom_open");
-  }
+const closePopup = () => {
+  profilePopup.classList.remove("popup_open");
+  imgAddPopup.classList.remove("popup_open");
+  imgViewPopup.classList.remove("zoom_open");
 };
 
 //submit func
-const submitPopup = (e, formType) => {
+const submitProfilePopup = (e) => {
   e.preventDefault();
-  if (formType !== imgPopForm) {
-    textName.textContent = nameInput.value;
-    occupation.textContent = occupationInput.value;
-    closePopup(profilePopup);
-  } else if (formType === imgPopForm) {
-    createCard();
-    closePopup(imgAddPopup);
-    imgPopForm.reset();
-  }
+  textName.textContent = nameInput.value;
+  occupation.textContent = occupationInput.value;
+  closePopup();
 };
+const submitImgAddPopup = (e) => {
+  e.preventDefault();
+  createCard({
+    link: linkInput.value,
+    alt: `Photo of: ${titleInput.value}`,
+    title: titleInput.value,
+  });
+  closePopup();
+  imgPopForm.reset();
+};
+
 ////listeners
 //open
 openProfileEditButton.addEventListener("click", () => openPopup(profilePopup));
@@ -155,10 +152,10 @@ closeProfileEditButton.addEventListener("click", () =>
   closePopup(profilePopup)
 );
 
-closeImgAddButton.addEventListener("click", () => closePopup(imgAddPopup));
+closeImgAddButton.addEventListener("click", () => closePopup());
 
-imgViewClose.addEventListener("click", () => closePopup(imgViewPopup));
+imgViewClose.addEventListener("click", () => closePopup());
 
 // submit listeners
-sumbitAddImgPopup.addEventListener("click", (e) => submitPopup(e, imgPopForm));
-sumbitEditProfile.addEventListener("click", (e) => submitPopup(e, profileForm));
+sumbitAddImgPopup.addEventListener("click", (e) => submitImgAddPopup(e));
+sumbitEditProfile.addEventListener("click", (e) => submitProfilePopup(e));
