@@ -22,17 +22,19 @@
   position: relative;
 }
 .zoom__img {
-  position: relative;
-  top: 30px;
-  width: 75vw;
-  height: 70vh;
+  background-image: none;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 830px;
+  height: 540px;
+
   box-sizing: border-box;
-  object-fit: cover;
 }
 .zoom__close {
   position: absolute;
-  top: -10px;
-  background-image: url("../images/close-X.svg");
+  top: -40px;
+  right: -40px;
+  background: url("../images/close-X.svg");
   background-position: center;
   background-repeat: no-repeat;
   width: 40px;
@@ -46,6 +48,7 @@
 }
 
 .zoom__alt {
+  margin-top: 10px;
   color: white;
   font-size: 12px;
   font-weight: 400;

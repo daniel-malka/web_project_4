@@ -1,30 +1,42 @@
-const popForm = document.querySelector(".form");
-//open popup
-const editButton = document.querySelector(".text__edit");
-const plusBoxOpen = document.querySelector(".top__plus-box");
-//close popup
-const closeEditButton = document.querySelector(".popup__close");
-const zoomClose = document.querySelector(".zoom__close");
-const plusBoxClose = document.querySelector(".popup__close");
-//close popup targets
-const popup = document.querySelector(".popup");
-let zoomPop = document.querySelector(".zoom");
-
-//sumbit popup
-const saveCreate = document.querySelector(".form__button");
-
-//gallery referance
-const galleryUl = document.querySelector(".gallery");
-const galleryLi = document.querySelector(".gallery__item");
-const galleryImg = document.querySelectorAll(".gallery__img");
-
-const popupTitle = document.querySelector(".popup__title");
-const textName = document.querySelector(".text__name");
-const occupation = document.querySelector(".text__occu");
+//profile popup + child refs
+const profilePopup = document.querySelector(".popup_type_profile");
+const openProfileEditButton = document.querySelector(".text__edit");
+const closeProfileEditButton = document.querySelector(
+  ".popup__close_type_profile"
+);
 const nameInput = document.querySelector(".form__input_type_name");
 const occupationInput = document.querySelector(".form__input_type_occu");
+const textName = document.querySelector(".text__name");
+const occupation = document.querySelector(".text__occu");
+const sumbitEditProfile = document.querySelector(".form__button_type_save");
+const profileForm = document.querySelector(".form_type_profile");
+const imgAddForm = document.querySelector(".form_type_img-add");
 
-const Gallery = [
+//addimg popup+ child refs
+const imgAddPopup = document.querySelector(".popup_type_addImg");
+const openImgAddPopup = document.querySelector(".top__plus-box");
+const closeImgAddButton = document.querySelector(".popup__close_type_img-add");
+const sumbitAddImgPopup = document.querySelector(".form__button_type_create");
+const titleInput = document.querySelector(".form__input_type_title");
+const linkInput = document.querySelector(".form__input_type_link");
+
+//view img popup + child refs
+let imgViewPopup = document.querySelector(".zoom");
+let imgViewContent = document.querySelector(".zoom__img");
+let imgViewParagraph = document.querySelector(".zoom__alt");
+const imgViewClose = document.querySelector(".zoom__close");
+
+//img popup form reference for reset
+const imgPopForm = document.querySelector(".form_type_img-add");
+
+//gallery referance
+const galleryContent = document.querySelector(".gallery");
+const galleryTemplate = document.querySelector("#gallery__item").content;
+let galleryItem;
+let galleryImg;
+let galleryText;
+
+const initialGallery = [
   {
     title: "Kenai Fjords interational Park",
     link: "https://images.unsplash.com/photo-1633967920376-33b2d94f091f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
@@ -57,132 +69,97 @@ const Gallery = [
   },
 ];
 
-Gallery.forEach((i) => {
-  const galleryItem = document.querySelector("#gallery__item").content;
-  const galleryLi = galleryItem.querySelector(".gallery__item").cloneNode(true);
-  galleryLi.querySelector(".gallery__img").src = i.link;
-  galleryLi.querySelector(".gallery__img").alt = i.alt;
-  galleryLi.querySelector(".desc__text").textContent = i.title;
-  galleryUl.append(galleryLi);
-  let galleryImg = document.querySelectorAll(".gallery__img");
+//cards conter
+let isExecutedSixTimes = 1;
 
-  galleryImg.forEach((img) => {
-    img.addEventListener("click", function (event) {
-      let zoomPop = document.querySelector(".zoom");
-      zoomPop.classList.add("zoom_open");
-      zoomPop.querySelector(".zoom__img").src = event.target.src;
-      zoomPop.querySelector(".zoom__alt").textContent =
-        event.target.parentElement.querySelector(".desc__text").textContent;
+const openPopup = (type) => {
+  type.classList.add("popup_open");
+  if (type === imgViewPopup) {
+    type.classList.add("zoom_open");
+  }
+};
+
+const createCard = (card) => {
+  galleryItem = galleryTemplate.querySelector(".gallery__item").cloneNode(true);
+  galleryImg = galleryItem.querySelector(".gallery__img");
+  galleryText = galleryItem.querySelector(".desc__text");
+  //img view
+  galleryImg.addEventListener("click", (event) => {
+    imgViewContent.src = event.target.src;
+    imgViewContent.alt = event.target.alt;
+
+    imgViewParagraph.textContent =
+      event.target.parentElement.querySelector(".desc__text").textContent;
+    openPopup(imgViewPopup);
+  });
+  //card remover
+  galleryItem
+    .querySelector(".gallery__bin")
+    .addEventListener("click", (event) => {
+      event.target.parentElement.remove();
     });
-  });
+  //heart like toggler
+  galleryItem
+    .querySelector(".desc__heart")
+    .addEventListener("click", function (event) {
+      event.target.classList.toggle("button_liked");
+    });
+
+  if (isExecutedSixTimes <= 6) {
+    galleryText.textContent = card.title;
+    galleryImg.src = card.link;
+    galleryImg.alt = card.alt;
+    galleryContent.append(galleryItem);
+  } else if (isExecutedSixTimes > 6) {
+    galleryImg.src = linkInput.value;
+    galleryImg.alt = `your input: ${titleInput.value}`;
+    galleryText.textContent = titleInput.value;
+    galleryContent.prepend(galleryItem);
+  }
+};
+//initial cards
+initialGallery.forEach((card) => {
+  createCard(card);
+  isExecutedSixTimes += 1;
 });
 
-let itemBin = document.querySelectorAll(".gallery__bin");
-itemBin.forEach((bin) => {
-  bin.addEventListener("click", function (event) {
-    event.target.parentElement.remove();
-  });
-});
-
-//like
-let heartLike = document.querySelectorAll(".desc__heart");
-heartLike.forEach((heart) => {
-  heart.addEventListener("click", function (event) {
-    event.target.classList.toggle("button_liked");
-  });
-});
-//function: form / gallery edit popup
-const imgToggle = () => {
-  zoomPop = document.querySelector(".zoom");
-  zoomPop.classList.toggle("zoom_open");
-};
-const formOpen = () => {
-  popupTitle.textContent = "Edit Profile";
-  nameInput.placeholder = "";
-  occupationInput.placeholder = "";
-  saveCreate.textContent = "Save";
-  nameInput.value = textName.textContent;
-  occupationInput.value = occupation.textContent;
-  occupation.type = "text";
-  popup.classList.add("popup_open");
+/////////////////////////////
+///////////functions/////////
+//close popup func
+const closePopup = (type) => {
+  type.classList.remove("popup_open");
+  if (type === imgViewPopup) {
+    type.classList.remove("zoom_open");
+  }
 };
 
-const galleryEditOpen = () => {
-  popupTitle.textContent = "New place";
-  nameInput.placeholder = "Title";
-  occupationInput.placeholder = "Link";
-  saveCreate.textContent = "Create";
-  nameInput.value = "";
-  occupationInput.value = "";
-  occupationInput.type = "url";
-  popup.classList.add("popup_open");
-};
-
-// //function: popup close
-const formClose = () => {
-  popup.classList.remove("popup_open");
-};
-
-let saveEdit = (e) => {
-  if (saveCreate.textContent === "Save") {
-    e.preventDefault();
+//submit func
+const submitPopup = (e, formType) => {
+  e.preventDefault();
+  if (formType !== imgPopForm) {
     textName.textContent = nameInput.value;
     occupation.textContent = occupationInput.value;
-    formClose();
-  } else if (saveCreate.textContent === "Create") {
-    e.preventDefault();
-    const galleryItem = document.querySelector("#gallery__item").content;
-    const galleryLi = galleryItem
-      .querySelector(".gallery__item")
-      .cloneNode(true);
-    let itemImage = galleryLi.querySelector(".gallery__img");
-    let itemTitle = galleryLi.querySelector(".desc__text");
-    let itemBin = galleryLi.querySelectorAll(".gallery__bin");
-    let heartLike = galleryLi.querySelectorAll(".desc__heart");
-    let itemImgAll = galleryLi.querySelectorAll(".gallery__img");
-    itemTitle.textContent = nameInput.value;
-    itemImage.src = occupationInput.value;
-    itemImage.alt = nameInput.value;
-
-    galleryUl.prepend(galleryLi);
-    formClose();
-    //loops bin + heart buttons
-    itemBin.forEach((bin) => {
-      bin.addEventListener("click", function (event) {
-        event.target.parentElement.remove();
-      });
-    });
-    heartLike.forEach((heart) => {
-      heart.addEventListener("click", function (event) {
-        event.target.classList.toggle("button_liked");
-      });
-    });
-    //loop added img
-    itemImgAll.forEach((img) => {
-      img.addEventListener("click", function (event) {
-        const zoomPop = document.querySelector(".zoom");
-        zoomPop.classList.add("zoom_open");
-        zoomPop.querySelector(".zoom__img").src = event.target.src;
-
-        zoomPop.querySelector(".zoom__alt").textContent =
-          event.target.parentElement.querySelector(".desc__text").textContent;
-      });
-    });
+    closePopup(profilePopup);
+  } else if (formType === imgPopForm) {
+    createCard();
+    closePopup(imgAddPopup);
+    imgPopForm.reset();
   }
 };
-const galleryEditClose = (event) => {
-  if (event.target === zoomPop) {
-    zoomPop.classList.remove("zoom_open");
-  } else if (event.target === popup) {
-    formClose();
-  }
-};
-// listeners
-saveCreate.addEventListener("click", saveEdit);
-editButton.addEventListener("click", formOpen);
-plusBoxOpen.addEventListener("click", galleryEditOpen);
-closeEditButton.addEventListener("click", formClose);
+////listeners
+//open
+openProfileEditButton.addEventListener("click", () => openPopup(profilePopup));
+openImgAddPopup.addEventListener("click", () => openPopup(imgAddPopup));
 
-zoomClose.addEventListener("click", imgToggle);
-popup.addEventListener("click", galleryEditClose);
-zoomPop.addEventListener("click", galleryEditClose);
+//close
+closeProfileEditButton.addEventListener("click", () =>
+  closePopup(profilePopup)
+);
+
+closeImgAddButton.addEventListener("click", () => closePopup(imgAddPopup));
+
+imgViewClose.addEventListener("click", () => closePopup(imgViewPopup));
+
+// submit listeners
+sumbitAddImgPopup.addEventListener("click", (e) => submitPopup(e, imgPopForm));
+sumbitEditProfile.addEventListener("click", (e) => submitPopup(e, profileForm));
