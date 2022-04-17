@@ -21,9 +21,9 @@ const titleInput = document.querySelector(".form__input_type_title");
 const linkInput = document.querySelector(".form__input_type_link");
 
 //view img popup + child refs
-let imgViewPopup = document.querySelector(".zoom");
-let imgViewContent = document.querySelector(".zoom__img");
-let imgViewParagraph = document.querySelector(".zoom__alt");
+const imgViewPopup = document.querySelector(".zoom");
+const imgViewContent = document.querySelector(".zoom__img");
+const imgViewParagraph = document.querySelector(".zoom__alt");
 const imgViewClose = document.querySelector(".zoom__close");
 
 //img popup form reference for reset
@@ -32,9 +32,6 @@ const imgPopForm = document.querySelector(".form_type_img-add");
 //gallery referance
 const galleryContent = document.querySelector(".gallery");
 const galleryTemplate = document.querySelector("#gallery__item").content;
-let galleryItem;
-let galleryImg;
-let galleryText;
 
 const initialGallery = [
   {
@@ -80,9 +77,11 @@ const openPopup = (type) => {
 };
 
 const createCard = (card) => {
-  galleryItem = galleryTemplate.querySelector(".gallery__item").cloneNode(true);
-  galleryImg = galleryItem.querySelector(".gallery__img");
-  galleryText = galleryItem.querySelector(".desc__text");
+  const galleryItem = galleryTemplate
+    .querySelector(".gallery__item")
+    .cloneNode(true);
+  const galleryImg = galleryItem.querySelector(".gallery__img");
+  const galleryText = galleryItem.querySelector(".desc__text");
   //img view
   galleryImg.addEventListener("click", (event) => {
     imgViewContent.src = event.target.src;

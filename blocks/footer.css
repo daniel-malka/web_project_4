@@ -7,7 +7,6 @@
   justify-self: flex-start;
   font-size: 18px;
   line-height: 21.78px;
-
   padding-bottom: 60px;
   color: #545454;
   margin-block-start: 0;
@@ -15,10 +14,16 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
+
+@media screen and (max-width: 940px) {
+  .footer__text {
+    padding-left: 19px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .footer__text {
     font-size: 14px;
-    padding-left: 19px;
     padding-bottom: 36px;
   }
 }
