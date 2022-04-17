@@ -14,7 +14,7 @@
   transition-duration: 600ms;
   opacity: 0;
 }
-.zoom_open {
+.popup_open {
   visibility: visible;
   opacity: 1;
 }

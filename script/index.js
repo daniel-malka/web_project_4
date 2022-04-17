@@ -70,12 +70,10 @@ const openPopup = (popup) => {
   popup.classList.add("popup_open");
 };
 
-const openImgviewPopup = () => {
-  imgViewPopup.classList.add("zoom_open");
-};
 //rendercard
 const renderCard = (card) => {
-  galleryContent.prepend(card);
+  const cardElement = createCard(card);
+  galleryContent.prepend(cardElement);
 };
 //create card
 const createCard = (card) => {
@@ -90,7 +88,7 @@ const createCard = (card) => {
     imgViewContent.alt = event.target.alt;
     imgViewParagraph.textContent =
       event.target.parentElement.querySelector(".desc__text").textContent;
-    openImgviewPopup();
+    openPopup(imgViewPopup);
   });
   //card remover
   galleryItem
@@ -107,21 +105,19 @@ const createCard = (card) => {
   galleryText.textContent = card.title;
   galleryImg.src = card.link;
   galleryImg.alt = card.alt;
-  renderCard(galleryItem);
+  return galleryItem;
 };
 
 //initial cards
 initialGallery.forEach((card) => {
-  createCard(card);
+  renderCard(card);
 });
 
 /////////////////////////////
 ///////////functions/////////
 //close popup func
-const closePopup = () => {
-  profilePopup.classList.remove("popup_open");
-  imgAddPopup.classList.remove("popup_open");
-  imgViewPopup.classList.remove("zoom_open");
+const closePopup = (popup) => {
+  popup.classList.remove("popup_open");
 };
 
 //submit func
@@ -129,16 +125,16 @@ const submitProfilePopup = (e) => {
   e.preventDefault();
   textName.textContent = nameInput.value;
   occupation.textContent = occupationInput.value;
-  closePopup();
+  closePopup(profilePopup);
 };
 const submitImgAddPopup = (e) => {
   e.preventDefault();
-  createCard({
+  renderCard({
     link: linkInput.value,
     alt: `Photo of: ${titleInput.value}`,
     title: titleInput.value,
   });
-  closePopup();
+  closePopup(imgAddPopup);
   imgPopForm.reset();
 };
 
@@ -152,10 +148,10 @@ closeProfileEditButton.addEventListener("click", () =>
   closePopup(profilePopup)
 );
 
-closeImgAddButton.addEventListener("click", () => closePopup());
+closeImgAddButton.addEventListener("click", () => closePopup(imgAddPopup));
 
-imgViewClose.addEventListener("click", () => closePopup());
+imgViewClose.addEventListener("click", () => closePopup(imgViewPopup));
 
 // submit listeners
-sumbitAddImgPopup.addEventListener("click", (e) => submitImgAddPopup(e));
-sumbitEditProfile.addEventListener("click", (e) => submitProfilePopup(e));
+sumbitAddImgPopup.addEventListener("click", submitImgAddPopup);
+sumbitEditProfile.addEventListener("click", submitProfilePopup);
