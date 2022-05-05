@@ -18,18 +18,25 @@ const hideInputError = (inputEl, configItems) => {
 const toggleButton = (inputs, buttons, configItems) => {
   const isInputsValid = inputs.every((input) => input.validity.valid);
   if (isInputsValid) {
-    console.log("valid");
     buttons.forEach((button) => {
       button.classList.remove(configItems.buttonDisable);
       button.disabled = false;
     });
   } else {
-    console.log();
     buttons.forEach((button) => {
       button.classList.add(configItems.buttonDisable);
       button.disabled = true;
     });
   }
+};
+export const hideAllErrors = (popup, configItems) => {
+  const formEl = popup.querySelector(configItems.formSelector);
+  const formInputs = Array.from(
+    formEl.querySelectorAll(configItems.inputSelector)
+  );
+  formInputs.forEach((input) => {
+    hideInputError(input, itemsValidChecker);
+  });
 };
 
 const validation = (configItems) => {
@@ -39,15 +46,13 @@ const validation = (configItems) => {
   allForms.forEach((formEl) => {
     formEl.addEventListener("submit", (evt) => evt.preventDefault());
     setEventListeners(formEl, configItems);
-  }); //mybe can toss preventDefault on index.js??
+  });
 };
 
 const checkInputValidity = (inputEl, configItems) => {
   if (!inputEl.validity.valid) {
-    console.log("invalid");
     showInputError(inputEl, inputEl.validationMessage, configItems);
   } else {
-    console.log("valid");
     hideInputError(inputEl, configItems);
   }
 };
@@ -59,6 +64,7 @@ const setEventListeners = (formEl, configItems) => {
   const allButtons = Array.from(
     document.querySelectorAll(configItems.buttonSelector)
   );
+
   allInputs.forEach((inputEl) => {
     inputEl.addEventListener("input", function () {
       checkInputValidity(inputEl, configItems);
@@ -67,7 +73,7 @@ const setEventListeners = (formEl, configItems) => {
   });
 };
 
-const itemsValidChecker = {
+export const itemsValidChecker = {
   formSelector: ".form",
   inputSelector: ".form__input",
   buttonSelector: ".form__button",

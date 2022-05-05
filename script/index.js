@@ -1,4 +1,4 @@
-
+import { itemsValidChecker, hideAllErrors } from "./validate.js";
 //profile edit popup + child refs
 const popupWindow = document.querySelectorAll(".popup");
 //popups
@@ -7,7 +7,9 @@ const profilePopup = document.querySelector(".popup_type_profile");
 const imgAddPopup = document.querySelector(".popup_type_card");
 
 //popup general modals
-const popupCloseButton = document.querySelectorAll(".popup__close");
+const closeImgButton = document.querySelector(".popup__close_type_img-view");
+const closeProfileButton = document.querySelector(".popup__close_type_profile");
+const closeAddCardButton = document.querySelector(".popup__close_type_img-add");
 //zoom modals
 const imgViewElement = imgViewPopup.querySelector(".popup__img");
 const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
@@ -28,13 +30,11 @@ const openImgAddPopup = document.querySelector(".top__plus-box");
 const profileForm = document.forms.formProfile;
 const formNameInput = profileForm.elements.name;
 const formOccupationInput = profileForm.elements.occupation;
-const formSaveButton = profileForm.elements.save;
+
 //add card
 const cardAddForm = document.forms.formImg;
 const formTitleInput = cardAddForm.elements.title;
 const formLinkInput = cardAddForm.elements.link;
-const formCreateButton = cardAddForm.elements.create;
-
 
 //view img popup + child refs
 
@@ -113,7 +113,6 @@ const createCard = (card) => {
   galleryImg.addEventListener("click", (evt) => {
     imgViewElement.src = evt.target.src;
     imgViewElement.alt = evt.target.alt;
-    console.log(evt.target);
     imgViewParagraph.textContent =
       evt.target.parentElement.querySelector(".desc__text").textContent;
     openPopup(imgViewPopup);
@@ -146,19 +145,17 @@ const closePopup = (popup) => {
   popup.classList.remove("popup_open");
   document.removeEventListener("mousedown", formMouseCancel);
   document.removeEventListener("keydown", formKeyCancel);
+  hideAllErrors(popup, itemsValidChecker);
 };
 
 //submit func
-const submitProfile = (e) => {
-  e.preventDefault();
+const submitProfile = () => {
   textName.textContent = formNameInput.value;
   occupation.textContent = formOccupationInput.value;
   closePopup(profilePopup);
 };
 
-const submitCard = (e) => {
-  e.preventDefault();
-
+const submitCard = () => {
   renderCard({
     link: formLinkInput.value,
     alt: `Photo of: ${formTitleInput.value}`,
@@ -173,15 +170,11 @@ const submitCard = (e) => {
 openProfileEditButton.addEventListener("click", () => openPopup(profilePopup));
 openImgAddPopup.addEventListener("click", () => openPopup(imgAddPopup));
 
-//close all popups
-popupCloseButton.forEach((pop) => {
-  pop.addEventListener("click", () => {
-    popupWindow.forEach((pop) => {
-      closePopup(pop);
-    });
-  });
-});
-
 // submit listeners
 cardAddForm.addEventListener("submit", submitCard);
 profileForm.addEventListener("submit", submitProfile);
+
+////closers
+closeImgButton.addEventListener("click", () => closePopup(imgViewPopup));
+closeProfileButton.addEventListener("click", () => closePopup(profilePopup));
+closeAddCardButton.addEventListener("click", () => closePopup(imgAddPopup));

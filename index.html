@@ -27,7 +27,7 @@
       </header>
       <main class="content">
         <div class="popup popup_type_zoom">
-          <div class="popup__container_img">
+          <div id="img-view" class="popup__container_img">
             <img class="popup__img" />
             <span
               class="popup__close popup__close_type_img-view"
@@ -39,7 +39,7 @@
         </div>
         //profile popup
         <div class="popup popup_type_profile">
-          <div class="popup__container">
+          <div id="profile" class="popup__container">
             <button
               type="button"
               aria-label="button"
@@ -92,6 +92,7 @@
                   id="save"
                   type="submit"
                   class="form__button save_button"
+                  disabled
                 >
                   Save
                 </button>
@@ -101,14 +102,19 @@
         </div>
 
         <div class="popup popup_type_card">
-          <div class="popup__container">
+          <div id="img-add" class="popup__container">
             <button
               type="button"
               aria-label="button"
               class="popup__close popup__close_type_img-add"
             ></button>
             <h3 class="popup__title">New place</h3>
-            <form name="formImg" class="form form_type_img_add" id="form__img">
+            <form
+              novalidate
+              name="formImg"
+              class="form form_type_img_add"
+              id="form__img"
+            >
               <fieldset class="form__fieldset">
                 <div class="form__input_fieldset">
                   <input
@@ -148,6 +154,7 @@
                   id="create"
                   type="submit"
                   class="form__button create_button"
+                  disabled
                 >
                   Create
                 </button>
@@ -206,7 +213,7 @@
       </li>
     </template>
 
-    <script src="./script/index.js"></script>
-    <script src="./script/validate.js"></script>
+    <script type="module" src="./script/index.js"></script>
+    <script type="module" src="./script/validate.js"></script>
   </body>
 </html>

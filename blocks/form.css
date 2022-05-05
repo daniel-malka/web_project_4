@@ -12,13 +12,16 @@
   border-color: none;
   border-width: none;
 }
+.form__input_fieldset {
+  position: relative;
+}
 
 .form__input {
   box-sizing: border-box;
   width: 100%;
   font-size: 14px;
-  line-height: 16.94px;
-  margin-bottom: 5px;
+  line-height: 17px;
+  margin-bottom: 30px;
   border-width: 0 0 1px 0;
   border-color: rgba(0, 0, 0, 0.2);
 }
@@ -29,11 +32,14 @@
   border-bottom: solid 1px #ff0000;
 }
 .form__input_error_message {
+  position: absolute;
+  top: 25px;
+  left: 0;
   visibility: hidden;
   opacity: 0;
+  margin-bottom: 13px;
   font-size: 12px;
-  padding-top: 4px;
-  min-height: 16px;
+  min-height: 12px;
   color: #ff0000;
 }
 .form__input_error_message_active {
