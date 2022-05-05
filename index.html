@@ -26,15 +26,19 @@
         />
       </header>
       <main class="content">
-        <sction class="zoom">
-          <div class="zoom__content">
-            <img class="zoom__img" />
-            <span class="zoom__close" type="button" aria-label="button"></span>
-            <p class="zoom__alt"></p>
+        <div class="popup popup_type_zoom">
+          <div class="popup__container_img">
+            <img class="popup__img" />
+            <span
+              class="popup__close popup__close_type_img-view"
+              type="button"
+              aria-label="button"
+            ></span>
+            <p class="popup__alt"></p>
           </div>
-        </sction>
-
-        <section class="popup popup_type_profile">
+        </div>
+        //profile popup
+        <div class="popup popup_type_profile">
           <div class="popup__container">
             <button
               type="button"
@@ -42,39 +46,61 @@
               class="popup__close popup__close_type_profile"
             ></button>
             <h3 class="popup__title">Edit Profile</h3>
-            <form name="form" class="form form_type_profile" id="form__profile">
-              <fieldset class="form__type">
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value="Jacques Cousteau"
-                  class="form__input form__input_type_name"
-                  required
-                />
-                <input
-                  type="text"
-                  id="occupation"
-                  name="occu"
-                  value="Explorer"
-                  class="form__input form__input_type_occu"
-                  required
-                />
+            <form
+              novalidate
+              name="formProfile"
+              class="form form_type_profile"
+              id="form__profile"
+            >
+              <fieldset class="form__fieldset">
+                <div class="form__input_fieldset">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value="Jacques Cousteau"
+                    class="form__input form__input_type_name"
+                    minlength="2"
+                    maxlength="40"
+                    required
+                  />
+                  <span
+                    class="form__input_error_message name_error_message"
+                  ></span>
+                </div>
+                <div class="form__input_fieldset">
+                  <input
+                    type="text"
+                    id="occupation"
+                    name="occu"
+                    placeholder="Occupation"
+                    value="Explorer"
+                    class="form__input form__input_type_occu"
+                    minlength="2"
+                    maxlength="200"
+                    required
+                  />
+                  <span
+                    class="form__input_error_message occupation_error_message"
+                  ></span>
+                </div>
               </fieldset>
 
-              <fieldset class="form__type">
+              <fieldset class="form__fieldset">
                 <button
+                  id="save"
                   type="submit"
-                  class="form__button form__button_type_save"
+                  class="form__button save_button"
                 >
                   Save
                 </button>
               </fieldset>
             </form>
           </div>
-        </section>
+        </div>
 
-        <section class="popup popup_type_addImg">
+        <div class="popup popup_type_card">
           <div class="popup__container">
             <button
               type="button"
@@ -82,39 +108,53 @@
               class="popup__close popup__close_type_img-add"
             ></button>
             <h3 class="popup__title">New place</h3>
-            <form name="form" class="form form_type_img-add" id="form__img">
-              <fieldset class="form__type">
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value=""
-                  placeholder="Title"
-                  class="form__input form__input_type_title"
-                  required
-                />
-                <input
-                  type="url"
-                  id="link"
-                  name="link"
-                  value=""
-                  placeholder="Link"
-                  class="form__input form__input_type_link"
-                  required
-                />
+            <form name="formImg" class="form form_type_img_add" id="form__img">
+              <fieldset class="form__fieldset">
+                <div class="form__input_fieldset">
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value=""
+                    placeholder="Title"
+                    class="form__input form__input_type_title"
+                    minlength="1"
+                    maxlength="30"
+                    required
+                  />
+                  <span
+                    class="form__input_error_message title_error_message"
+                  ></span>
+                </div>
+
+                <div class="form__input_fieldset">
+                  <input
+                    type="url"
+                    id="link"
+                    name="link"
+                    value=""
+                    placeholder="Link"
+                    class="form__input form__input_type_link"
+                    required
+                  />
+                  <span
+                    class="form__input_error_message link_error_message"
+                  ></span>
+                </div>
               </fieldset>
 
-              <fieldset class="form__type">
+              <fieldset class="form__fieldset">
                 <button
+                  id="create"
                   type="submit"
-                  class="form__button form__button_type_create"
+                  class="form__button create_button"
                 >
                   Create
                 </button>
               </fieldset>
             </form>
           </div>
-        </section>
+        </div>
 
         <section class="top">
           <img
@@ -167,5 +207,6 @@
     </template>
 
     <script src="./script/index.js"></script>
+    <script src="./script/validate.js"></script>
   </body>
 </html>

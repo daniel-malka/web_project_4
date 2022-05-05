@@ -1,33 +1,42 @@
-//profile popup + child refs
+
+//profile edit popup + child refs
+const popupWindow = document.querySelectorAll(".popup");
+//popups
+const imgViewPopup = document.querySelector(".popup_type_zoom");
 const profilePopup = document.querySelector(".popup_type_profile");
+const imgAddPopup = document.querySelector(".popup_type_card");
+
+//popup general modals
+const popupCloseButton = document.querySelectorAll(".popup__close");
+//zoom modals
+const imgViewElement = imgViewPopup.querySelector(".popup__img");
+const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
+
+//profile modals
 const openProfileEditButton = document.querySelector(".text__edit");
-const closeProfileEditButton = document.querySelector(
-  ".popup__close_type_profile"
-);
-const nameInput = document.querySelector(".form__input_type_name");
-const occupationInput = document.querySelector(".form__input_type_occu");
+
 const textName = document.querySelector(".text__name");
 const occupation = document.querySelector(".text__occu");
-const sumbitEditProfile = document.querySelector(".form__button_type_save");
-const profileForm = document.querySelector(".form_type_profile");
-const imgAddForm = document.querySelector(".form_type_img-add");
 
-//addimg popup+ child refs
-const imgAddPopup = document.querySelector(".popup_type_addImg");
+//card add popup + child refs
+
 const openImgAddPopup = document.querySelector(".top__plus-box");
-const closeImgAddButton = document.querySelector(".popup__close_type_img-add");
-const sumbitAddImgPopup = document.querySelector(".form__button_type_create");
-const titleInput = document.querySelector(".form__input_type_title");
-const linkInput = document.querySelector(".form__input_type_link");
+
+//forms
+
+//profile
+const profileForm = document.forms.formProfile;
+const formNameInput = profileForm.elements.name;
+const formOccupationInput = profileForm.elements.occupation;
+const formSaveButton = profileForm.elements.save;
+//add card
+const cardAddForm = document.forms.formImg;
+const formTitleInput = cardAddForm.elements.title;
+const formLinkInput = cardAddForm.elements.link;
+const formCreateButton = cardAddForm.elements.create;
+
 
 //view img popup + child refs
-const imgViewPopup = document.querySelector(".zoom");
-const imgViewContent = document.querySelector(".zoom__img");
-const imgViewParagraph = document.querySelector(".zoom__alt");
-const imgViewClose = document.querySelector(".zoom__close");
-
-//img popup form reference for reset
-const imgPopForm = document.querySelector(".form_type_img-add");
 
 //gallery referance
 const galleryContent = document.querySelector(".gallery");
@@ -65,9 +74,27 @@ const initialGallery = [
     alt: "grand canyon desert view",
   },
 ];
+
+const formMouseCancel = (evt) => {
+  const openedPopup = document.querySelector(".popup_open");
+  if (evt.target.classList.contains("popup")) {
+    closePopup(openedPopup);
+  }
+};
+
+const formKeyCancel = (evt) => {
+  const openedPopup = document.querySelector(".popup_open");
+  if (evt.key == "Escape") {
+    closePopup(openedPopup);
+  } else {
+  }
+};
+
 //open popupps
 const openPopup = (popup) => {
   popup.classList.add("popup_open");
+  document.addEventListener("mousedown", formMouseCancel);
+  document.addEventListener("keydown", formKeyCancel);
 };
 
 //rendercard
@@ -83,24 +110,23 @@ const createCard = (card) => {
   const galleryImg = galleryItem.querySelector(".gallery__img");
   const galleryText = galleryItem.querySelector(".desc__text");
   //img view
-  galleryImg.addEventListener("click", (event) => {
-    imgViewContent.src = event.target.src;
-    imgViewContent.alt = event.target.alt;
+  galleryImg.addEventListener("click", (evt) => {
+    imgViewElement.src = evt.target.src;
+    imgViewElement.alt = evt.target.alt;
+    console.log(evt.target);
     imgViewParagraph.textContent =
-      event.target.parentElement.querySelector(".desc__text").textContent;
+      evt.target.parentElement.querySelector(".desc__text").textContent;
     openPopup(imgViewPopup);
   });
   //card remover
-  galleryItem
-    .querySelector(".gallery__bin")
-    .addEventListener("click", (event) => {
-      event.target.parentElement.remove();
-    });
+  galleryItem.querySelector(".gallery__bin").addEventListener("click", () => {
+    galleryItem.remove();
+  });
   //heart like toggler
   galleryItem
     .querySelector(".desc__heart")
-    .addEventListener("click", function (event) {
-      event.target.classList.toggle("button_liked");
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("button_liked");
     });
   galleryText.textContent = card.title;
   galleryImg.src = card.link;
@@ -118,24 +144,28 @@ initialGallery.forEach((card) => {
 //close popup func
 const closePopup = (popup) => {
   popup.classList.remove("popup_open");
+  document.removeEventListener("mousedown", formMouseCancel);
+  document.removeEventListener("keydown", formKeyCancel);
 };
 
 //submit func
-const submitProfilePopup = (e) => {
+const submitProfile = (e) => {
   e.preventDefault();
-  textName.textContent = nameInput.value;
-  occupation.textContent = occupationInput.value;
+  textName.textContent = formNameInput.value;
+  occupation.textContent = formOccupationInput.value;
   closePopup(profilePopup);
 };
-const submitImgAddPopup = (e) => {
+
+const submitCard = (e) => {
   e.preventDefault();
+
   renderCard({
-    link: linkInput.value,
-    alt: `Photo of: ${titleInput.value}`,
-    title: titleInput.value,
+    link: formLinkInput.value,
+    alt: `Photo of: ${formTitleInput.value}`,
+    title: formTitleInput.value,
   });
   closePopup(imgAddPopup);
-  imgPopForm.reset();
+  cardAddForm.reset();
 };
 
 ////listeners
@@ -143,15 +173,15 @@ const submitImgAddPopup = (e) => {
 openProfileEditButton.addEventListener("click", () => openPopup(profilePopup));
 openImgAddPopup.addEventListener("click", () => openPopup(imgAddPopup));
 
-//close
-closeProfileEditButton.addEventListener("click", () =>
-  closePopup(profilePopup)
-);
-
-closeImgAddButton.addEventListener("click", () => closePopup(imgAddPopup));
-
-imgViewClose.addEventListener("click", () => closePopup(imgViewPopup));
+//close all popups
+popupCloseButton.forEach((pop) => {
+  pop.addEventListener("click", () => {
+    popupWindow.forEach((pop) => {
+      closePopup(pop);
+    });
+  });
+});
 
 // submit listeners
-sumbitAddImgPopup.addEventListener("click", submitImgAddPopup);
-sumbitEditProfile.addEventListener("click", submitProfilePopup);
+cardAddForm.addEventListener("submit", submitCard);
+profileForm.addEventListener("submit", submitProfile);
