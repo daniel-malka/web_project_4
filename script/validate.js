@@ -1,52 +1,55 @@
-const showInputError = (inputEl, errorMessage, configItems) => {
+const showInputError = (
+  inputEl,
+  errorMessage,
+  { inputErrorClass, spanErrorClass }
+) => {
   const errorDynamicSpan = document.querySelector(
     `.${inputEl.id}_error_message`
   );
-  inputEl.classList.add(configItems.inputErrorClass);
+  inputEl.classList.add(inputErrorClass);
   errorDynamicSpan.textContent = errorMessage;
-  errorDynamicSpan.classList.add(configItems.spanErrorClass);
+  errorDynamicSpan.classList.add(spanErrorClass);
 };
-const hideInputError = (inputEl, configItems) => {
+const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   const errorDynamicSpan = document.querySelector(
     `.${inputEl.id}_error_message`
   );
 
-  inputEl.classList.remove(configItems.inputErrorClass);
-  errorDynamicSpan.classList.remove(configItems.spanErrorClass);
+  inputEl.classList.remove(inputErrorClass);
+  errorDynamicSpan.classList.remove(spanErrorClass);
   errorDynamicSpan.textContent = "";
 };
 
-const toggleButton = (inputs, buttons, configItems) => {
+const toggleButton = (inputs, buttons, { buttonDisable }) => {
   const isInputsValid = inputs.every((input) => input.validity.valid);
   if (isInputsValid) {
     buttons.forEach((button) => {
-      button.classList.remove(configItems.buttonDisable);
+      button.classList.remove(buttonDisable);
       button.disabled = false;
     });
   } else {
     buttons.forEach((button) => {
-      button.classList.add(configItems.buttonDisable);
+      button.classList.add(buttonDisable);
       button.disabled = true;
     });
   }
 };
-export const hideAllErrors = (popup, configItems) => {
-  const formEl = popup.querySelector(configItems.formSelector);
-  const formInputs = Array.from(
-    formEl.querySelectorAll(configItems.inputSelector)
-  );
+export const hideAllErrors = (
+  popup,
+  { formSelector, inputSelector, ...rest }
+) => {
+  const formEl = popup.querySelector(formSelector);
+  const formInputs = Array.from(formEl.querySelectorAll(inputSelector));
   formInputs.forEach((input) => {
-    hideInputError(input, configItems);
+    hideInputError(input, rest);
   });
 };
 
-const validation = (configItems) => {
-  const allForms = Array.from(
-    document.querySelectorAll(configItems.formSelector)
-  );
+const validation = ({ formSelector, ...rest }) => {
+  const allForms = Array.from(document.querySelectorAll(formSelector));
   allForms.forEach((formEl) => {
     formEl.addEventListener("submit", (evt) => evt.preventDefault());
-    setEventListeners(formEl, configItems);
+    setEventListeners(formEl, rest);
   });
 };
 
@@ -58,18 +61,17 @@ const checkInputValidity = (inputEl, configItems) => {
   }
 };
 
-const setEventListeners = (formEl, configItems) => {
-  const allInputs = Array.from(
-    formEl.querySelectorAll(configItems.inputSelector)
-  );
-  const allButtons = Array.from(
-    document.querySelectorAll(configItems.buttonSelector)
-  );
+const setEventListeners = (
+  formEl,
+  { inputSelector, buttonSelector, ...rest }
+) => {
+  const allInputs = Array.from(formEl.querySelectorAll(inputSelector));
+  const allButtons = Array.from(document.querySelectorAll(buttonSelector));
 
   allInputs.forEach((inputEl) => {
     inputEl.addEventListener("input", () => {
-      checkInputValidity(inputEl, configItems);
-      toggleButton(allInputs, allButtons, configItems);
+      checkInputValidity(inputEl, rest);
+      toggleButton(allInputs, allButtons, rest);
     });
   });
 };
