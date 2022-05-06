@@ -4,7 +4,7 @@ const showInputError = (
   { inputErrorClass, spanErrorClass }
 ) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__input_error-${inputEl.id}`
+    `.fieldset__error_type-${inputEl.id}`
   );
   inputEl.classList.add(inputErrorClass);
   errorDynamicSpan.textContent = errorMessage;
@@ -12,7 +12,7 @@ const showInputError = (
 };
 const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__input_error-${inputEl.id}`
+    `.fieldset__error_type-${inputEl.id}`
   );
 
   inputEl.classList.remove(inputErrorClass);
@@ -91,7 +91,7 @@ export const itemsValidChecker = {
   buttonSelector: ".fieldset__button",
   buttonDisable: "fieldset__button_disabled",
   inputErrorClass: "fieldset__input_error",
-  spanErrorClass: "fieldset__input_error-message-active",
+  spanErrorClass: "fieldset__error-message-active",
 };
 
 validation(itemsValidChecker);
