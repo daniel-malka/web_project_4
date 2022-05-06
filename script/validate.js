@@ -4,7 +4,7 @@ const showInputError = (
   { inputErrorClass, spanErrorClass }
 ) => {
   const errorDynamicSpan = document.querySelector(
-    `.${inputEl.id}_error_message`
+    `.input_error_type_${inputEl.id}`
   );
   inputEl.classList.add(inputErrorClass);
   errorDynamicSpan.textContent = errorMessage;
@@ -12,7 +12,7 @@ const showInputError = (
 };
 const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   const errorDynamicSpan = document.querySelector(
-    `.${inputEl.id}_error_message`
+    `.input_error_type_${inputEl.id}`
   );
 
   inputEl.classList.remove(inputErrorClass);
@@ -34,7 +34,7 @@ const toggleButton = (inputs, buttons, { buttonDisable }) => {
     });
   }
 };
-export const disableButtonOnSubmit = (
+export const disableButtonOnSubmitOrClose = (
   popup,
   { formSelector, buttonSelector, buttonDisable }
 ) => {

@@ -1,7 +1,7 @@
 import {
   itemsValidChecker,
   hideAllErrors,
-  disableButtonOnSubmit,
+  disableButtonOnSubmitOrClose,
 } from "./validate.js";
 //img-view popup + child refs
 const imgViewPopup = document.querySelector(".popup_type_zoom");
@@ -141,6 +141,7 @@ const closePopup = (popup) => {
     setTimeout(resetProfileForm, 500);
   } else if (popup === imgAddPopup) {
     hideAllErrors(popup, itemsValidChecker);
+    disableButtonOnSubmitOrClose(imgAddPopup, itemsValidChecker);
     setTimeout(cardAddForm.reset(), 500);
   }
   popup.classList.remove("popup_open");
@@ -179,7 +180,7 @@ const submitCard = () => {
     alt: `Photo of: ${formTitleInput.value}`,
     title: formTitleInput.value,
   });
-  disableButtonOnSubmit(imgAddPopup, itemsValidChecker);
+
   closePopup(imgAddPopup);
 };
 
