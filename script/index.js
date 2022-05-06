@@ -132,17 +132,20 @@ initialGallery.forEach((card) => {
 
 //close popup func
 const closePopup = (popup) => {
+  if (popup === profilePopup) {
+    hideAllErrors(popup, itemsValidChecker);
+    setTimeout(resetProfileForm, 500);
+  } else if (popup === imgAddPopup) {
+    hideAllErrors(popup, itemsValidChecker);
+    setTimeout(cardAddForm.reset(), 500);
+  }
   popup.classList.remove("popup_open");
   document.removeEventListener("mousedown", formMouseCancel);
   document.removeEventListener("keydown", formKeyCancel);
-  hideAllErrors(popup, itemsValidChecker);
-  if (popup === profilePopup) {
-    resetProfile();
-  }
 };
 
 //submit func
-const resetProfile = () => {
+const resetProfileForm = () => {
   formNameInput.value = textName.textContent;
   formOccupationInput.value = occupation.textContent;
 };
@@ -161,7 +164,6 @@ const submitCard = () => {
     title: formTitleInput.value,
   });
   closePopup(imgAddPopup);
-  cardAddForm.reset();
 };
 
 ////listeners
@@ -177,3 +179,4 @@ profileForm.addEventListener("submit", submitProfile);
 closeImgButton.addEventListener("click", () => closePopup(imgViewPopup));
 closeProfileButton.addEventListener("click", () => closePopup(profilePopup));
 closeAddCardButton.addEventListener("click", () => closePopup(imgAddPopup));
+// closePopup(profilePopup)
