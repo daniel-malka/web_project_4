@@ -31,7 +31,7 @@
 .fieldset__input_error {
   border-bottom: solid 1px #ff0000;
 }
-.fieldset__input_error_message {
+.fieldset__input_error-message {
   position: absolute;
   top: 25px;
   left: 0;
@@ -42,7 +42,7 @@
   min-height: 12px;
   color: #ff0000;
 }
-.fieldset__input_error_message_active {
+.fieldset__input_error-message-active {
   visibility: visible;
   opacity: 1;
 }

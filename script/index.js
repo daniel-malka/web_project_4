@@ -1,4 +1,8 @@
-import { itemsValidChecker, hideAllErrors } from "./validate.js";
+import {
+  itemsValidChecker,
+  hideAllErrors,
+  disableButtonOnSubmit,
+} from "./validate.js";
 //img-view popup + child refs
 const imgViewPopup = document.querySelector(".popup_type_zoom");
 const closeImgButton = document.querySelector(".popup__close_type_img-view");
@@ -156,13 +160,26 @@ const submitProfile = () => {
   occupation.textContent = formOccupationInput.value;
   closePopup(profilePopup);
 };
-
+// const handleAndCallToggleButton = (
+//   allInputs,
+//   allButtons,
+//   itemsValidChecker
+// ) => {
+//   allInputs = Array.from(
+//     document.querySelectorAll(itemsValidChecker.inputSelector)
+//   );
+//   allButtons = Array.from(
+//     document.querySelectorAll(itemsValidChecker.buttonSelector)
+//   );
+//   toggleButton(allInputs, allButtons, itemsValidChecker);
+// };
 const submitCard = () => {
   renderCard({
     link: formLinkInput.value,
     alt: `Photo of: ${formTitleInput.value}`,
     title: formTitleInput.value,
   });
+  disableButtonOnSubmit(imgAddPopup, itemsValidChecker);
   closePopup(imgAddPopup);
 };
 

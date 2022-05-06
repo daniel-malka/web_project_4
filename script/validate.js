@@ -34,6 +34,15 @@ const toggleButton = (inputs, buttons, { buttonDisable }) => {
     });
   }
 };
+export const disableButtonOnSubmit = (
+  popup,
+  { formSelector, buttonSelector, buttonDisable }
+) => {
+  const formEl = popup.querySelector(formSelector);
+  const buttonEl = formEl.querySelector(buttonSelector);
+  buttonEl.classList.add(buttonDisable);
+  buttonEl.disabled = true;
+};
 export const hideAllErrors = (
   popup,
   { formSelector, inputSelector, ...rest }
@@ -78,11 +87,11 @@ const setEventListeners = (
 
 export const itemsValidChecker = {
   formSelector: ".form",
-  inputSelector: ".form__input",
-  buttonSelector: ".form__button",
-  buttonDisable: "form__button_disabled",
-  inputErrorClass: "form__input_error",
-  spanErrorClass: "form__input_error_message_active",
+  inputSelector: ".fieldset__input",
+  buttonSelector: ".fieldset__button",
+  buttonDisable: "fieldset__button_disabled",
+  inputErrorClass: "fieldset__input_error",
+  spanErrorClass: "fieldset__input_error-message-active",
 };
 
 validation(itemsValidChecker);
