@@ -1,31 +1,24 @@
 import { itemsValidChecker, hideAllErrors } from "./validate.js";
-//profile edit popup + child refs
-const popupWindow = document.querySelectorAll(".popup");
-//popups
+//img-view popup + child refs
 const imgViewPopup = document.querySelector(".popup_type_zoom");
-const profilePopup = document.querySelector(".popup_type_profile");
-const imgAddPopup = document.querySelector(".popup_type_card");
-
-//popup general modals
 const closeImgButton = document.querySelector(".popup__close_type_img-view");
-const closeProfileButton = document.querySelector(".popup__close_type_profile");
-const closeAddCardButton = document.querySelector(".popup__close_type_img-add");
-//zoom modals
 const imgViewElement = imgViewPopup.querySelector(".popup__img");
 const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
 
-//profile modals
+//popup profile + child refs
+const profilePopup = document.querySelector(".popup_type_profile");
+const closeProfileButton = document.querySelector(".popup__close_type_profile");
 const openProfileEditButton = document.querySelector(".text__edit");
-
 const textName = document.querySelector(".text__name");
 const occupation = document.querySelector(".text__occu");
 
 //card add popup + child refs
 
+const imgAddPopup = document.querySelector(".popup_type_card");
 const openImgAddPopup = document.querySelector(".top__plus-box");
+const closeAddCardButton = document.querySelector(".popup__close_type_img-add");
 
-//forms
-
+//forms//
 //profile
 const profileForm = document.forms.formProfile;
 const formNameInput = profileForm.elements.name;
@@ -35,8 +28,6 @@ const formOccupationInput = profileForm.elements.occupation;
 const cardAddForm = document.forms.formImg;
 const formTitleInput = cardAddForm.elements.title;
 const formLinkInput = cardAddForm.elements.link;
-
-//view img popup + child refs
 
 //gallery referance
 const galleryContent = document.querySelector(".gallery");
@@ -74,7 +65,6 @@ const initialGallery = [
     alt: "grand canyon desert view",
   },
 ];
-
 const formMouseCancel = (evt) => {
   const openedPopup = document.querySelector(".popup_open");
   if (evt.target.classList.contains("popup")) {
@@ -96,7 +86,6 @@ const openPopup = (popup) => {
   document.addEventListener("mousedown", formMouseCancel);
   document.addEventListener("keydown", formKeyCancel);
 };
-
 //rendercard
 const renderCard = (card) => {
   const cardElement = createCard(card);
@@ -140,12 +129,22 @@ initialGallery.forEach((card) => {
 
 /////////////////////////////
 ///////////functions/////////
+
 //close popup func
 const closePopup = (popup) => {
   popup.classList.remove("popup_open");
   document.removeEventListener("mousedown", formMouseCancel);
   document.removeEventListener("keydown", formKeyCancel);
   hideAllErrors(popup, itemsValidChecker);
+  if (popup === profilePopup) {
+    resetProfile();
+  }
+};
+
+//submit func
+const resetProfile = () => {
+  formNameInput.value = textName.textContent;
+  formOccupationInput.value = occupation.textContent;
 };
 
 //submit func

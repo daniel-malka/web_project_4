@@ -10,6 +10,7 @@ const hideInputError = (inputEl, configItems) => {
   const errorDynamicSpan = document.querySelector(
     `.${inputEl.id}_error_message`
   );
+
   inputEl.classList.remove(configItems.inputErrorClass);
   errorDynamicSpan.classList.remove(configItems.spanErrorClass);
   errorDynamicSpan.textContent = "";
@@ -35,7 +36,7 @@ export const hideAllErrors = (popup, configItems) => {
     formEl.querySelectorAll(configItems.inputSelector)
   );
   formInputs.forEach((input) => {
-    hideInputError(input, itemsValidChecker);
+    hideInputError(input, configItems);
   });
 };
 
@@ -66,7 +67,7 @@ const setEventListeners = (formEl, configItems) => {
   );
 
   allInputs.forEach((inputEl) => {
-    inputEl.addEventListener("input", function () {
+    inputEl.addEventListener("input", () => {
       checkInputValidity(inputEl, configItems);
       toggleButton(allInputs, allButtons, configItems);
     });
