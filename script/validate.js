@@ -4,7 +4,7 @@ const showInputError = (
   { inputErrorClass, spanErrorClass }
 ) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__error_type-${inputEl.id}`
+    `.fieldset__error_type_${inputEl.id}`
   );
   inputEl.classList.add(inputErrorClass);
   errorDynamicSpan.textContent = errorMessage;
@@ -12,7 +12,7 @@ const showInputError = (
 };
 const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__error_type-${inputEl.id}`
+    `.fieldset__error_type_${inputEl.id}`
   );
 
   inputEl.classList.remove(inputErrorClass);
