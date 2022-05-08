@@ -1,17 +1,13 @@
-import {
-  itemsValidChecker,
-  hideAllErrors,
-  disableButtonOnSubmitOrClose,
-} from "./validate.js";
+import { itemsValidChecker, hideAllErrors, disableButton } from "./validate.js";
 //img-view popup + child refs
 const imgViewPopup = document.querySelector(".popup_type_zoom");
-const closeImgButton = document.querySelector(".popup__close_type_img-view");
+
 const imgViewElement = imgViewPopup.querySelector(".popup__img");
 const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
 
 //popup profile + child refs
 const profilePopup = document.querySelector(".popup_type_profile");
-const closeProfileButton = document.querySelector(".popup__close_type_profile");
+
 const openProfileEditButton = document.querySelector(".text__edit");
 const textName = document.querySelector(".text__name");
 const occupation = document.querySelector(".text__occu");
@@ -20,8 +16,9 @@ const occupation = document.querySelector(".text__occu");
 
 const imgAddPopup = document.querySelector(".popup_type_card");
 const openImgAddPopup = document.querySelector(".top__plus-box");
-const closeAddCardButton = document.querySelector(".popup__close_type-img-add");
 
+//
+const closeButtons = document.querySelectorAll(".popup__close");
 //forms//
 //profile
 const profileForm = document.forms.formProfile;
@@ -69,16 +66,15 @@ const initialGallery = [
     alt: "grand canyon desert view",
   },
 ];
-const formMouseCancel = (evt) => {
-  const openedPopup = document.querySelector(".popup_open");
+const handleOverlay = (evt) => {
   if (evt.target.classList.contains("popup")) {
-    closePopup(openedPopup);
+    closePopup(evt.target);
   }
 };
 
-const formKeyCancel = (evt) => {
-  const openedPopup = document.querySelector(".popup_open");
+const handleEscKey = (evt) => {
   if (evt.key == "Escape") {
+    const openedPopup = document.querySelector(".popup_open");
     closePopup(openedPopup);
   } else {
   }
@@ -86,9 +82,17 @@ const formKeyCancel = (evt) => {
 
 //open popupps
 const openPopup = (popup) => {
+  if (popup === profilePopup) {
+    hideAllErrors(popup, itemsValidChecker);
+    setTimeout(fillProfileInputs, 300);
+  } else if (popup === imgAddPopup) {
+    hideAllErrors(popup, itemsValidChecker);
+    disableButton(imgAddPopup, itemsValidChecker);
+    setTimeout(cardAddForm.reset(), 300);
+  }
   popup.classList.add("popup_open");
-  document.addEventListener("mousedown", formMouseCancel);
-  document.addEventListener("keydown", formKeyCancel);
+  document.addEventListener("mousedown", handleOverlay);
+  document.addEventListener("keydown", handleEscKey);
 };
 //rendercard
 const renderCard = (card) => {
@@ -136,21 +140,13 @@ initialGallery.forEach((card) => {
 
 //close popup func
 const closePopup = (popup) => {
-  if (popup === profilePopup) {
-    hideAllErrors(popup, itemsValidChecker);
-    setTimeout(resetProfileForm, 500);
-  } else if (popup === imgAddPopup) {
-    hideAllErrors(popup, itemsValidChecker);
-    disableButtonOnSubmitOrClose(imgAddPopup, itemsValidChecker);
-    setTimeout(cardAddForm.reset(), 500);
-  }
   popup.classList.remove("popup_open");
-  document.removeEventListener("mousedown", formMouseCancel);
-  document.removeEventListener("keydown", formKeyCancel);
+  document.removeEventListener("mousedown", handleOverlay);
+  document.removeEventListener("keydown", handleEscKey);
 };
 
 //submit func
-const resetProfileForm = () => {
+const fillProfileInputs = () => {
   formNameInput.value = textName.textContent;
   formOccupationInput.value = occupation.textContent;
 };
@@ -194,7 +190,8 @@ cardAddForm.addEventListener("submit", submitCard);
 profileForm.addEventListener("submit", submitProfile);
 
 ////closers
-closeImgButton.addEventListener("click", () => closePopup(imgViewPopup));
-closeProfileButton.addEventListener("click", () => closePopup(profilePopup));
-closeAddCardButton.addEventListener("click", () => closePopup(imgAddPopup));
 // closePopup(profilePopup)
+closeButtons.forEach((button) => {
+  const closestParent = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(closestParent));
+});

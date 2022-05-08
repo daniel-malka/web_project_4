@@ -20,21 +20,17 @@ const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   errorDynamicSpan.textContent = "";
 };
 
-const toggleButton = (inputs, buttons, { buttonDisable }) => {
+const toggleButton = (inputs, button, { buttonDisable }) => {
   const isInputsValid = inputs.every((input) => input.validity.valid);
   if (isInputsValid) {
-    buttons.forEach((button) => {
-      button.classList.remove(buttonDisable);
-      button.disabled = false;
-    });
+    button.classList.remove(buttonDisable);
+    button.disabled = false;
   } else {
-    buttons.forEach((button) => {
-      button.classList.add(buttonDisable);
-      button.disabled = true;
-    });
+    button.classList.add(buttonDisable);
+    button.disabled = true;
   }
 };
-export const disableButtonOnSubmitOrClose = (
+export const disableButton = (
   popup,
   { formSelector, buttonSelector, buttonDisable }
 ) => {
@@ -54,7 +50,7 @@ export const hideAllErrors = (
   });
 };
 
-const validation = ({ formSelector, ...rest }) => {
+const enableValidation = ({ formSelector, ...rest }) => {
   const allForms = Array.from(document.querySelectorAll(formSelector));
   allForms.forEach((formEl) => {
     formEl.addEventListener("submit", (evt) => evt.preventDefault());
@@ -78,12 +74,12 @@ const setEventListeners = (
   { inputSelector, buttonSelector, ...rest }
 ) => {
   const allInputs = Array.from(formEl.querySelectorAll(inputSelector));
-  const allButtons = Array.from(document.querySelectorAll(buttonSelector));
+  const button = formEl.querySelector(buttonSelector);
 
   allInputs.forEach((inputEl) => {
     inputEl.addEventListener("input", () => {
       checkInputValidity(inputEl, rest);
-      toggleButton(allInputs, allButtons, rest);
+      toggleButton(allInputs, button, rest);
     });
   });
 };
@@ -97,4 +93,4 @@ export const itemsValidChecker = {
   spanErrorClass: "fieldset__error-message-active",
 };
 
-validation(itemsValidChecker);
+enableValidation(itemsValidChecker);
