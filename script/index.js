@@ -20,7 +20,7 @@ const occupation = document.querySelector(".text__occu");
 
 const imgAddPopup = document.querySelector(".popup_type_card");
 const openImgAddPopup = document.querySelector(".top__plus-box");
-const closeAddCardButton = document.querySelector(".popup__close_type_img-add");
+const closeAddCardButton = document.querySelector(".popup__close_type-img-add");
 
 //forms//
 //profile

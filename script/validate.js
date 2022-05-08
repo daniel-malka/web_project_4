@@ -4,7 +4,7 @@ const showInputError = (
   { inputErrorClass, spanErrorClass }
 ) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__error_type-${inputEl.id}`
+    `.fieldset__error-type-${inputEl.id}`
   );
   inputEl.classList.add(inputErrorClass);
   errorDynamicSpan.textContent = errorMessage;
@@ -12,7 +12,7 @@ const showInputError = (
 };
 const hideInputError = (inputEl, { inputErrorClass, spanErrorClass }) => {
   const errorDynamicSpan = document.querySelector(
-    `.fieldset__error_type-${inputEl.id}`
+    `.fieldset__error-type-${inputEl.id}`
   );
 
   inputEl.classList.remove(inputErrorClass);
@@ -62,11 +62,14 @@ const validation = ({ formSelector, ...rest }) => {
   });
 };
 
-const checkInputValidity = (inputEl, configItems) => {
+const checkInputValidity = (inputEl, { inputErrorClass, spanErrorClass }) => {
   if (!inputEl.validity.valid) {
-    showInputError(inputEl, inputEl.validationMessage, configItems);
+    showInputError(inputEl, inputEl.validationMessage, {
+      inputErrorClass,
+      spanErrorClass,
+    });
   } else {
-    hideInputError(inputEl, configItems);
+    hideInputError(inputEl, { inputErrorClass, spanErrorClass });
   }
 };
 
