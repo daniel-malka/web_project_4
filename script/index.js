@@ -80,16 +80,21 @@ const handleEscKey = (evt) => {
   }
 };
 
+const resetAndOpenProfilePopup = (popup) => {
+  hideAllErrors(popup, itemsValidChecker);
+  fillProfileInputs();
+  openPopup(popup);
+};
+
+const resetAndOpenImgAddPopup = (popup) => {
+  hideAllErrors(popup, itemsValidChecker);
+  disableButton(imgAddPopup, itemsValidChecker);
+  cardAddForm.reset();
+  openPopup(popup);
+};
+
 //open popupps
 const openPopup = (popup) => {
-  if (popup === profilePopup) {
-    hideAllErrors(popup, itemsValidChecker);
-    setTimeout(fillProfileInputs, 300);
-  } else if (popup === imgAddPopup) {
-    hideAllErrors(popup, itemsValidChecker);
-    disableButton(imgAddPopup, itemsValidChecker);
-    setTimeout(cardAddForm.reset(), 300);
-  }
   popup.classList.add("popup_open");
   document.addEventListener("mousedown", handleOverlay);
   document.addEventListener("keydown", handleEscKey);
@@ -157,19 +162,7 @@ const submitProfile = () => {
   occupation.textContent = formOccupationInput.value;
   closePopup(profilePopup);
 };
-// const handleAndCallToggleButton = (
-//   allInputs,
-//   allButtons,
-//   itemsValidChecker
-// ) => {
-//   allInputs = Array.from(
-//     document.querySelectorAll(itemsValidChecker.inputSelector)
-//   );
-//   allButtons = Array.from(
-//     document.querySelectorAll(itemsValidChecker.buttonSelector)
-//   );
-//   toggleButton(allInputs, allButtons, itemsValidChecker);
-// };
+
 const submitCard = () => {
   renderCard({
     link: formLinkInput.value,
@@ -182,8 +175,12 @@ const submitCard = () => {
 
 ////listeners
 //open
-openProfileEditButton.addEventListener("click", () => openPopup(profilePopup));
-openImgAddPopup.addEventListener("click", () => openPopup(imgAddPopup));
+openProfileEditButton.addEventListener("click", () =>
+  resetAndOpenProfilePopup(profilePopup)
+);
+openImgAddPopup.addEventListener("click", () =>
+  resetAndOpenImgAddPopup(imgAddPopup)
+);
 
 // submit listeners
 cardAddForm.addEventListener("submit", submitCard);
