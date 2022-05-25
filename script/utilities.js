@@ -1,4 +1,4 @@
-import { FormValidator } from "./FormValidate.js";
+import { FormValidator } from "./formValidate.js";
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
 const closeButtons = document.querySelectorAll(".popup__close");

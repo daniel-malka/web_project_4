@@ -30,8 +30,6 @@ export class FormValidator {
   };
 
   _setEventListeners = () => {
-    const { inputSelector } = this._settings;
-
     this._allInputs.forEach((inputEl) => {
       inputEl.addEventListener("input", () => {
         this._checkInputValidity(inputEl);

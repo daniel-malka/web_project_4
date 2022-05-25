@@ -1,6 +1,6 @@
 import { closePopup } from "./utilities.js";
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidate.js";
+import { Card } from "./card.js";
+import { FormValidator } from "./formValidate.js";
 
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
