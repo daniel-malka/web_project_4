@@ -1,8 +1,8 @@
-// import { imgViewElement, imgViewParagraph, imgViewPopup } from "./index.js";
+
 const imgViewPopup = document.querySelector(".popup_type_zoom");
 const imgViewElement = imgViewPopup.querySelector(".popup__img");
 const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
-import { openPopup } from "./utilities.js";
+import { openPopup } from "./Utilities.js";
 export class Card {
   constructor(data, templateElement) {
     this._title = data.title;

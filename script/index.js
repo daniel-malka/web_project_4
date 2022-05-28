@@ -1,26 +1,63 @@
-import { closePopup } from "./utilities.js";
-import { Card } from "./card.js";
-import { FormValidator } from "./formValidate.js";
+import { closePopup, openPopup } from "./Utilities.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidate.js";
 
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
-const formNameInput = profileForm.elements.name;
-const formOccupationInput = profileForm.elements.occupation;
-const profileFormValidator = new FormValidator(profileForm);
-const imgAddFormValidator = new FormValidator(cardAddForm);
-profileFormValidator.enableValidation();
-imgAddFormValidator.enableValidation();
-
-//popup profile + child refs
-const profilePopup = document.querySelector(".popup_type_profile");
-const textName = document.querySelector(".text__name");
-const occupation = document.querySelector(".text__occu");
-//card add popup + child refs
-
-//forms
 const formTitleInput = cardAddForm.elements.title;
 const formLinkInput = cardAddForm.elements.link;
+const formNameInput = profileForm.elements.name;
+const formOccupationInput = profileForm.elements.occupation;
+const closeButtons = document.querySelectorAll(".popup__close");
+const imgAddPopup = document.querySelector(".popup_type_card");
+const profilePopup = document.querySelector(".popup_type_profile");
 
+const textName = document.querySelector(".text__name");
+const textOccupation = document.querySelector(".text__occu");
+const openProfileEditButton = document.querySelector(".text__edit");
+const openImgAddPopup = document.querySelector(".top__plus-box");
+
+const formValidators = { formImg: "formImg", formProfile: "formProfile" };
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".form"));
+  formList.forEach((formEl) => {
+    const validator = new FormValidator(formEl);
+    const formName = formEl.getAttribute("name");
+    formValidators[formName] = validator;
+    console.log(validator);
+
+    validator.enableValidation();
+  });
+};
+
+enableValidation();
+
+//forms
+
+const fillProfileInputs = () => {
+  formNameInput.value = textName.textContent;
+  formOccupationInput.value = textOccupation.textContent;
+};
+
+const handleProfileFormInputs = () => {
+  textName.textContent = formNameInput.value;
+  textOccupation.textContent = formOccupationInput.value;
+};
+
+const resetAndOpenProfileForm = () => {
+  fillProfileInputs();
+  formValidators[profileForm.getAttribute("name")].resetValidation();
+  openPopup(profilePopup);
+};
+openProfileEditButton.addEventListener("click", () =>
+  resetAndOpenProfileForm()
+);
+
+const resetAndOpenImgAddForm = () => {
+  formValidators[cardAddForm.getAttribute("name")].resetValidation();
+
+  openPopup(imgAddPopup);
+};
 //gallery referance
 const galleryContent = document.querySelector(".gallery");
 const initialGallery = [
@@ -49,30 +86,35 @@ const initialGallery = [
     link: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80",
   },
 ];
-
-//rendercard
+//renders
 const renderCard = (data, templateElement) => {
-  const newCard = new Card(data, templateElement);
-  const createCardElement = newCard.createCard();
-  galleryContent.prepend(createCardElement);
+  const newCardElement = createCard(data, templateElement);
+  galleryContent.prepend(newCardElement);
 };
+const renderInitialcards = (data, templateElement) => {
+  const newCardElement = createCard(data, templateElement);
+  galleryContent.append(newCardElement);
+};
+
 //create card
+const createCard = (data, templateElement) => {
+  const card = new Card(data, templateElement);
+  return card.createCard();
+};
 
 //initial cards
 initialGallery.forEach((card) => {
-  renderCard(card, "#gallery__item");
+  renderInitialcards(card, "#gallery__item");
 });
-
-/////////////////////////////
-///////////functions/////////
 
 //close popup func
 
-//submit func
-const handleProfileFormInputs = () => {
-  textName.textContent = formNameInput.value;
-  occupation.textContent = formOccupationInput.value;
-};
+openImgAddPopup.addEventListener("click", () => resetAndOpenImgAddForm());
+
+closeButtons.forEach((button) => {
+  const closestParent = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(closestParent));
+});
 //submit func
 const submitProfile = () => {
   handleProfileFormInputs();
@@ -84,11 +126,8 @@ const submitCard = () => {
     { link: formLinkInput.value, title: formTitleInput.value },
     "#gallery__item"
   );
-  const imgAddPopup = document.querySelector(".popup_type_card");
   closePopup(imgAddPopup);
 };
+
 cardAddForm.addEventListener("submit", submitCard);
 profileForm.addEventListener("submit", submitProfile);
-
-////listeners
-//open

@@ -12,23 +12,21 @@ export class FormValidator {
     this._allInputs = Array.from(
       this._formElement.querySelectorAll(this._settings.inputSelector)
     );
+    this._buttonEl = this._formElement.querySelector(
+      this._settings.buttonSelector
+    );
   }
+  resetForm = () => this.resetValidation();
 
-  resetProfilePopup = () => {
+  resetValidation = () => {
     this._hideAllErrors();
-    this._fillProfileInputs();
-  };
-  resetImgAddPopup = () => {
-    this._hideAllErrors();
-    this._disableButton();
     this._formElement.reset();
+    this._disableButton();
   };
-
   enableValidation = () => {
     this._formElement.addEventListener("submit", (evt) => evt.preventDefault());
     this._setEventListeners();
   };
-
   _setEventListeners = () => {
     this._allInputs.forEach((inputEl) => {
       inputEl.addEventListener("input", () => {
@@ -42,52 +40,38 @@ export class FormValidator {
       this._hideInputError(input);
     });
   };
-  _fillProfileInputs = () => {
-    this._formNameInput = this._formElement.elements.name;
-    this._formOccupationInput = this._formElement.elements.occupation;
-    this._textName = document.querySelector(".text__name");
-    this._occupation = document.querySelector(".text__occu");
-
-    this._formNameInput.value = this._textName.textContent;
-    this._formOccupationInput.value = this._occupation.textContent;
-  };
   _disableButton = () => {
-    const { buttonSelector, buttonDisable } = this._settings;
-    const buttonEl = this._formElement.querySelector(buttonSelector);
-    buttonEl.classList.add(buttonDisable);
-    buttonEl.disabled = true;
+    const { buttonDisable } = this._settings;
+    this._buttonEl.classList.add(buttonDisable);
+    this._buttonEl.disabled = true;
   };
-
   _showInputError = (inputEl, errorMessage) => {
     const { inputErrorClass, spanErrorClass } = this._settings;
-    const errorDynamicSpan = document.querySelector(
+    this._errorDynamicSpan = this._formElement.querySelector(
       `.fieldset__error-type-${inputEl.id}`
     );
     inputEl.classList.add(inputErrorClass);
-    errorDynamicSpan.textContent = errorMessage;
-    errorDynamicSpan.classList.add(spanErrorClass);
+    this._errorDynamicSpan.textContent = errorMessage;
+    this._errorDynamicSpan.classList.add(spanErrorClass);
   };
   _hideInputError = (inputEl) => {
     const { inputErrorClass, spanErrorClass } = this._settings;
-    const errorDynamicSpan = document.querySelector(
+    this._errorDynamicSpan = this._formElement.querySelector(
       `.fieldset__error-type-${inputEl.id}`
     );
-
     inputEl.classList.remove(inputErrorClass);
-    errorDynamicSpan.classList.remove(spanErrorClass);
-    errorDynamicSpan.textContent = "";
+    this._errorDynamicSpan.classList.remove(spanErrorClass);
+    this._errorDynamicSpan.textContent = "";
   };
-
   _toggleButton = (inputs) => {
-    const { buttonDisable, buttonSelector } = this._settings;
+    const { buttonDisable } = this._settings;
     const isInputsValid = inputs.every((input) => input.validity.valid);
-    const button = this._formElement.querySelector(buttonSelector);
+
     if (isInputsValid) {
-      button.classList.remove(buttonDisable);
-      button.disabled = false;
+      this._buttonEl.classList.remove(buttonDisable);
+      this._buttonEl.disabled = false;
     } else {
-      button.classList.add(buttonDisable);
-      button.disabled = true;
+      this._disableButton;
     }
   };
   _checkInputValidity = (inputEl) => {
