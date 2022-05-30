@@ -16,8 +16,6 @@ export class FormValidator {
       this._settings.buttonSelector
     );
   }
-  resetForm = () => this.resetValidation();
-
   resetValidation = () => {
     this._hideAllErrors();
     this._formElement.reset();
@@ -71,7 +69,7 @@ export class FormValidator {
       this._buttonEl.classList.remove(buttonDisable);
       this._buttonEl.disabled = false;
     } else {
-      this._disableButton;
+      this._disableButton();
     }
   };
   _checkInputValidity = (inputEl) => {

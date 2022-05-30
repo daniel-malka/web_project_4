@@ -1,6 +1,6 @@
 import { closePopup, openPopup } from "./Utilities.js";
 import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidate.js";
+import { FormValidator } from "./FormValidator.js";
 
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
@@ -24,7 +24,6 @@ const enableValidation = () => {
     const validator = new FormValidator(formEl);
     const formName = formEl.getAttribute("name");
     formValidators[formName] = validator;
-    console.log(validator);
 
     validator.enableValidation();
   });
