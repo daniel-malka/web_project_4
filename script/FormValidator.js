@@ -1,13 +1,6 @@
 export class FormValidator {
-  constructor(formElement) {
-    this._settings = {
-      inputSelector: ".fieldset__input",
-      buttonSelector: ".fieldset__button",
-      buttonDisable: "fieldset__button_disabled",
-      inputErrorClass: "fieldset__input_error",
-      spanErrorClass: "fieldset__error-message-active",
-    };
-
+  constructor(settings, formElement) {
+    this._settings = settings;
     this._formElement = formElement;
     this._allInputs = Array.from(
       this._formElement.querySelectorAll(this._settings.inputSelector)

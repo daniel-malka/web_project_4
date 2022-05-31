@@ -26,9 +26,9 @@
 .text__edit {
   box-sizing: border-box;
   border: 1px solid white;
-  align-self: center;
-  min-width: 24px;
-  min-height: 24px;
+  margin-top: 12px;
+  width: 24px;
+  height: 24px;
   background-color: #000;
   background-image: url("../images/pen.svg");
   background-position: center;
@@ -76,6 +76,7 @@
     column-gap: 10px;
   }
   .text__edit {
+    margin-top: 0;
     align-self: flex-start;
     min-width: 18px;
     min-height: 18px;

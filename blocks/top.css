@@ -16,8 +16,8 @@
   position: relative;
   box-sizing: border-box;
   width: 150px;
-  align-self: center;
   height: 50px;
+  margin-top: 12px;
   background-image: url("../images/plus.svg");
   background-position: center;
   background-color: transparent;
@@ -54,6 +54,7 @@
   }
   .top__plus-box {
     width: 282px;
+    margin-top: 0;
     height: 50px;
   }
 }
