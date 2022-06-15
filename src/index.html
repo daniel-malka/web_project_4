@@ -12,7 +12,6 @@
       name="description"
       content="an interactive web-page via JS that has information about cities in The United Stats"
     />
-    <link rel="stylesheet" href="./pages/index.css" />
 
     <title>Aroud the US.</title>
   </head>
@@ -20,7 +19,7 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/top__logo.svg"
+          src="<%=require('./images/top__logo.svg')%>"
           alt="AROUND the us logo"
           class="header__logo"
         />
@@ -165,7 +164,7 @@
 
         <section class="top">
           <img
-            src="./images/header__img.png"
+            src="<%=require('./images/header__img.png')%>"
             alt="Profile picture"
             class="top__img"
           />
@@ -212,10 +211,10 @@
         </div>
       </li>
     </template>
-
+    <!-- 
     <script type="module" src="./script/Card.js"></script>
     <script type="module" src="./script/Utilities.js"></script>
     <script type="module" src="./script/FormValidate.js"></script>
-    <script type="module" src="./script/index.js"></script>
+    <script type="module" src="./script/index.js"></script> -->
   </body>
 </html>

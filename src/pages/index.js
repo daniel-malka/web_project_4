@@ -1,7 +1,9 @@
-import { closePopup, openPopup } from "./Utilities.js";
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import "./index.css";
+import { closePopup, openPopup } from "../components/Utilities";
+import { Card } from "../components/Card";
+import { FormValidator } from "../components/FormValidator";
 //forms
+
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
 const formTitleInput = cardAddForm.elements.title;
