@@ -4,11 +4,12 @@ const imgViewElement = imgViewPopup.querySelector(".popup__img");
 const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
 
 export class Card {
-  constructor(data, templateElement) {
+  constructor(data, templateElement, handleCardClick) {
     this._title = data.title;
     this._link = data.link;
     this._alt = `Photo of ${data.title}`;
     this._templateElement = templateElement;
+    this._handleCardClick = handleCardClick;
   }
   _handleImgViewPopup = (evt) => {
     imgViewElement.src = evt.target.src;
@@ -23,9 +24,7 @@ export class Card {
   _setEventListeners() {
     this._deleteCard.addEventListener("click", this._removeCard);
     this._likeCard.addEventListener("click", this._toggleHeart);
-    this._galleryImg.addEventListener("click", (evt) =>
-      this._handleImgViewPopup(evt)
-    );
+    this._galleryImg.addEventListener("click", (evt) => this._handleCardClick);
   }
 
   createCard() {

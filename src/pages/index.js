@@ -2,14 +2,31 @@ import "./index.css";
 import { closePopup, openPopup } from "../components/Utilities";
 import { Card } from "../components/Card";
 import { FormValidator } from "../components/FormValidator";
+import { PopupWithImage } from "../components/PopupWithImage";
+import { PopupWithForm } from "../components/PopupWithForm";
 //forms
+const submitProfile = () => {
+  handleProfileFormInputs();
+  closePopup(profilePopup);
+};
+const ProfileForm = new PopupWithForm(".popup_type_profile", () => {
+  submitProfile();
+});
+ProfileForm.setEventListeners();
 
+const submitCard = (data) => {
+  console.log(data);
+  renderCard(data, "#gallery__item");
+  addCardForm.close();
+};
+
+const addCardForm = new PopupWithForm(".popup_type_card", (data) => {
+  console.log(data);
+  submitCard(data);
+});
+addCardForm.setEventListeners();
 const cardAddForm = document.forms.formImg;
 const profileForm = document.forms.formProfile;
-const formTitleInput = cardAddForm.elements.title;
-const formLinkInput = cardAddForm.elements.link;
-const formNameInput = profileForm.elements.name;
-const formOccupationInput = profileForm.elements.occupation;
 
 //popups
 const imgAddPopup = document.querySelector(".popup_type_card");
@@ -117,23 +134,9 @@ initialGallery.forEach((card) => {
 //close popup func
 
 //submit func
-const submitProfile = () => {
-  handleProfileFormInputs();
-  closePopup(profilePopup);
-};
-
-const submitCard = () => {
-  renderCard(
-    { link: formLinkInput.value, title: formTitleInput.value },
-    "#gallery__item"
-  );
-  closePopup(imgAddPopup);
-};
 
 openImgAddPopup.addEventListener("click", () => resetAndOpenImgAddForm());
 closeButtons.forEach((button) => {
   const closestParent = button.closest(".popup");
   button.addEventListener("click", () => closePopup(closestParent));
 });
-cardAddForm.addEventListener("submit", submitCard);
-profileForm.addEventListener("submit", submitProfile);
