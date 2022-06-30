@@ -1,30 +1,26 @@
-import { openPopup } from "./Utilities.js";
+import { openPopup } from "./constants.js";
 const imgViewPopup = document.querySelector(".popup_type_zoom");
 const imgViewElement = imgViewPopup.querySelector(".popup__img");
-const imgViewParagraph = imgViewPopup.querySelector(".popup__alt");
+const imgViewParagraph = imgViewPopup.querySelector(".popup__caption");
 
 export class Card {
-  constructor(data, templateElement, handleCardClick) {
-    this._title = data.title;
-    this._link = data.link;
-    this._alt = `Photo of ${data.title}`;
-    this._templateElement = templateElement;
+  constructor(data, selector, handleCardClick) {
+    (this._title = data.title),
+      (this._link = data.link),
+      (this._alt = `Photo of ${data.title}`);
+    this._templateElement = selector;
     this._handleCardClick = handleCardClick;
   }
-  _handleImgViewPopup = (evt) => {
-    imgViewElement.src = evt.target.src;
-    imgViewElement.alt = evt.target.alt;
-    imgViewParagraph.textContent = this._title;
-    openPopup(imgViewPopup);
-  };
   _removeCard = () => this._cardElement.remove();
   _toggleHeart = (evt) => {
     evt.target.classList.toggle("button_liked");
   };
   _setEventListeners() {
-    this._deleteCard.addEventListener("click", this._removeCard);
-    this._likeCard.addEventListener("click", this._toggleHeart);
-    this._galleryImg.addEventListener("click", (evt) => this._handleCardClick);
+    this._deleteCard.addEventListener("click", () => this._removeCard());
+    this._likeCard.addEventListener("click", (evt) => this._toggleHeart(evt));
+    this._galleryImg.addEventListener("click", () =>
+      this._handleCardClick(this._title, this._link)
+    );
   }
 
   createCard() {
@@ -39,11 +35,10 @@ export class Card {
     this._likeCard = this._cardElement.querySelector(".desc__heart");
 
     this._galleryImg.src = this._link;
-    this._galleryImg.alt = this._alt;
     this._galleryText.textContent = this._title;
+    this._galleryImg.alt = this._alt;
 
     this._setEventListeners();
     return this._cardElement;
-    //img view
   }
 }
