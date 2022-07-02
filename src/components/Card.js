@@ -1,7 +1,3 @@
-import { openPopup } from "./constants.js";
-const imgViewPopup = document.querySelector(".popup_type_zoom");
-const imgViewElement = imgViewPopup.querySelector(".popup__img");
-const imgViewParagraph = imgViewPopup.querySelector(".popup__caption");
 
 export class Card {
   constructor(data, selector, handleCardClick) {

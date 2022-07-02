@@ -43,21 +43,25 @@ const resetAndOpenImgAddForm = () => {
   addCardForm.open();
 };
 const handleProfileFormInputs = (data) => {
-  nameInput.value = data.name;
-  occupationInput.value = data.occupation;
+  profileForm.setInputValues(data);
 };
 
 const resetAndOpenProfileForm = () => {
   formValidators[formProfile.getAttribute("name")].resetValidation();
   const profileData = userInfo.getUserInfo();
   handleProfileFormInputs(profileData);
-  ProfileForm.open();
+  profileForm.open();
 };
-const renderCard = (data, cardselector) => {
+
+const createCard = (data) => {
   const card = new Card(data, templateSelector, (title, link) => {
     popupWithImage.open(title, link);
   });
-  section.addItem(card.createCard());
+  return card.createCard();
+};
+const renderCard = (data, cardselector) => {
+  const card = createCard(data);
+  section.addItem(card);
 };
 enableValidation();
 
@@ -68,8 +72,8 @@ const userInfo = new UserInfo(spanArray);
 const popupWithImage = new PopupWithImage(openImgView);
 popupWithImage.setEventListeners();
 
-const ProfileForm = new PopupWithForm(profilePopup, submiteProfileFormInputs);
-ProfileForm.setEventListeners();
+const profileForm = new PopupWithForm(profilePopup, submiteProfileFormInputs);
+profileForm.setEventListeners();
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
   renderCard(
