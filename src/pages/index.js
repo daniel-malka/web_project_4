@@ -18,7 +18,7 @@ import {
   openImgAddPopup,
   settings,
   initialGallery,
-} from "../components/constants";
+} from "../utilities/constants";
 //functions/////////////////////////////
 ////////////////////////////////////////
 

@@ -2,31 +2,32 @@ export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
   }
-  _handleOverlay(evt) {
+  _handleOverlay = (evt) => {
     if (evt.target.classList.contains("popup")) {
       this.close();
     }
-  }
+  };
 
-  _handleEscClose(evt) {
+  _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
+      console.log("aja");
     }
-  }
+  };
   open() {
     this._popup.classList.add("popup_open");
-    document.addEventListener("keyup", (evt) => this._handleEscClose(evt));
+    document.addEventListener("keydown", this._handleEscClose);
   }
   close() {
     this._popup.classList.remove("popup_open");
-    this._popup.removeEventListener("keydown", (evt) =>
-      this._handleEscClose(evt)
-    );
+    document.removeEventListener("keydown", this._handleEscClose);
+    this._popup.removeEventListener("mousedown", this._handleOverlay);
+    this._popup;
   }
   setEventListeners() {
-    this._popup.addEventListener("click", (evt) => this._handleOverlay(evt));
-    this._popup.querySelector(".popup__close").addEventListener("click", () => {
-      this.close();
-    });
+    document.addEventListener("mousedown", this._handleOverlay);
+    this._popup
+      .querySelector(".popup__close")
+      .addEventListener("mousedown", () => this.close());
   }
 }
