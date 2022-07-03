@@ -11,7 +11,6 @@ export class Popup {
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
-      console.log("aja");
     }
   };
   open() {
@@ -21,11 +20,9 @@ export class Popup {
   close() {
     this._popup.classList.remove("popup_open");
     document.removeEventListener("keydown", this._handleEscClose);
-    this._popup.removeEventListener("mousedown", this._handleOverlay);
-    this._popup;
   }
   setEventListeners() {
-    document.addEventListener("mousedown", this._handleOverlay);
+    this._popup.addEventListener("mousedown", this._handleOverlay);
     this._popup
       .querySelector(".popup__close")
       .addEventListener("mousedown", () => this.close());
