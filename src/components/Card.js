@@ -1,7 +1,7 @@
 
 export class Card {
   constructor(data, selector, handleCardClick) {
-    (this._title = data.title),
+    (this._title = data.name),
       (this._link = data.link),
       (this._alt = `Photo of ${data.title}`);
     this._templateElement = selector;
@@ -15,7 +15,7 @@ export class Card {
     this._deleteCard.addEventListener("click", () => this._removeCard());
     this._likeCard.addEventListener("click", (evt) => this._toggleHeart(evt));
     this._galleryImg.addEventListener("click", () =>
-      this._handleCardClick(this._title, this._link)
+      this._handleCardClick(this._name, this._link)
     );
   }
 

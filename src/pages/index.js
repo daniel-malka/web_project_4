@@ -10,23 +10,45 @@ import {
   addCardPopup,
   profilePopup,
   openImgView,
-  nameInput,
-  occupationInput,
   templateSelector,
-  spanArray,
+  profileSpanArray,
   openProfileEditButton,
   openImgAddPopup,
   settings,
-  initialGallery,
 } from "../utilities/constants";
+import { api } from "../components/Api";
+const renderCard = (data) => {
+  const card = createCard(data);
+
+  section.addItem(card);
+};
 //functions/////////////////////////////
 ////////////////////////////////////////
+const userInfo = new UserInfo(profileSpanArray);
 
-initialGallery.reverse();
+api.getUserInfo().then((res) => {
+  userInfo.setUserInfo(res.name, res.about);
+});
 
-const submiteProfileFormInputs = (data) => {
-  userInfo.setUserInfo(data);
+api
+  .getCardsInfo()
+  .then((res) => {
+    section.renderItems(res);
+  })
+  .catch(console.log);
+
+const submiteProfileFormInputs = (dat) => {
+  userInfo.setUserInfo(dat);
 };
+const section = new Section({ renderer: renderCard }, galleryWrap);
+
+// fetch("https://around.nomoreparties.co/v1/cohort-3-en/cards")
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then((res) => {
+//     section.renderItems(res);
+//   });
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
 const enableValidation = () => {
@@ -43,7 +65,16 @@ const resetAndOpenImgAddForm = () => {
   addCardForm.open();
 };
 const handleProfileFormInputs = (data) => {
-  profileForm.setInputValues(data);
+  api
+    .setUserInfo(data.name, data.about)
+    .then((res) => {
+      console.log(res);
+      userInfo.setUserInfo(name, about);
+    })
+    .catch((err) => console.log(err, "sommthing went wrong"))
+    .finally(() => {
+      profilePopup.close();
+    });
 };
 
 const resetAndOpenProfileForm = () => {
@@ -54,20 +85,16 @@ const resetAndOpenProfileForm = () => {
 };
 
 const createCard = (data) => {
-  const card = new Card(data, templateSelector, (title, link) => {
-    popupWithImage.open(title, link);
+  const card = new Card(data, templateSelector, (name, link) => {
+    popupWithImage.open(name, link);
   });
   return card.createCard();
 };
-const renderCard = (data, cardselector) => {
-  const card = createCard(data);
-  section.addItem(card);
-};
+
 enableValidation();
 
 //classes////////////////////////////////////////
 /////////////////////////////////////////////////
-const userInfo = new UserInfo(spanArray);
 
 const popupWithImage = new PopupWithImage(openImgView);
 popupWithImage.setEventListeners();
@@ -76,9 +103,16 @@ const profileForm = new PopupWithForm(profilePopup, submiteProfileFormInputs);
 profileForm.setEventListeners();
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
+  api
+    .getCardsInfo()
+    .then((res) => {
+      section.renderItems(res);
+    })
+    .catch(console.log);
+
   renderCard(
     {
-      title: data.title,
+      name: data.name,
       link: data.link,
     },
     galleryWrap
@@ -87,11 +121,6 @@ const addCardForm = new PopupWithForm(addCardPopup, (data) => {
 });
 addCardForm.setEventListeners();
 
-const section = new Section(
-  { items: initialGallery, renderer: renderCard },
-  galleryWrap
-);
-section.renderItems();
 //listeners//////////
 /////////////////////
 
