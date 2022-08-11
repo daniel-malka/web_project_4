@@ -12,7 +12,7 @@ export class UserInfo {
   }
   setUserInfo(name, about) {
     console.log(name);
-    this._userName.textContent = name.textContent;
+    this._userName.textContent = name;
     this._userAbout.textContent = about;
   }
 }
