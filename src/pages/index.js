@@ -15,6 +15,8 @@ import {
   openProfileEditButton,
   openImgAddPopup,
   settings,
+  nameInput,
+  aboutInput,
 } from "../utilities/constants";
 import { api } from "../components/Api";
 const renderCard = (data) => {
@@ -27,6 +29,7 @@ const renderCard = (data) => {
 const userInfo = new UserInfo(profileSpanArray);
 
 api.getUserInfo().then((res) => {
+  console.log(res);
   userInfo.setUserInfo(res.name, res.about);
 });
 
@@ -37,8 +40,16 @@ api
   })
   .catch(console.log);
 
-const submiteProfileFormInputs = (dat) => {
-  userInfo.setUserInfo(dat);
+const submiteProfileFormInputs = (data) => {
+  api
+    .setUserInfo(data.name, data.about)
+    .then((data) => {
+      userInfo.setUserInfo({ nameInput: data.name, aboutInput: data.about });
+    })
+    .catch((err) => console.log(err, "sommthing went wrong"))
+    .finally(() => {
+      profilePopup.close();
+    });
 };
 const section = new Section({ renderer: renderCard }, galleryWrap);
 
@@ -65,16 +76,9 @@ const resetAndOpenImgAddForm = () => {
   addCardForm.open();
 };
 const handleProfileFormInputs = (data) => {
-  api
-    .setUserInfo(data.name, data.about)
-    .then((res) => {
-      console.log(res);
-      userInfo.setUserInfo(name, about);
-    })
-    .catch((err) => console.log(err, "sommthing went wrong"))
-    .finally(() => {
-      profilePopup.close();
-    });
+  const { name, about } = userInfo.getUserInfo();
+  nameInput.value = name;
+  aboutInput.value = about;
 };
 
 const resetAndOpenProfileForm = () => {

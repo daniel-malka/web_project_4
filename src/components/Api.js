@@ -20,7 +20,10 @@ class Api {
   addCard() {
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
-      body: JSON.stringify(res),
+      body: JSON.stringify({
+        title: title,
+        link: link,
+      }),
       headers: this._headers,
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))
@@ -31,8 +34,8 @@ class Api {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name,
+        about,
       }),
     });
   }

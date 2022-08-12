@@ -1,6 +1,5 @@
 export class UserInfo {
   constructor(data) {
-    console.log(data);
     this._userName = document.querySelector(data.name);
     this._userAbout = document.querySelector(data.about);
   }
@@ -10,9 +9,8 @@ export class UserInfo {
       about: this._userAbout.textContent,
     };
   }
-  setUserInfo(name, about) {
-    console.log(name);
-    this._userName.textContent = name;
-    this._userAbout.textContent = about;
+  setUserInfo({ nameInput, aboutInput }) {
+    this._userName.textContent = nameInput;
+    this._userAbout.textContent = aboutInput;
   }
 }

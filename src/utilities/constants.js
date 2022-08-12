@@ -9,6 +9,7 @@ const profileSpanArray = {
   name: ".text__name",
   about: ".text__about",
 };
+
 const openProfileEditButton = document.querySelector(".text__edit");
 const openImgAddPopup = document.querySelector(".top__plus-box");
 //settings
