@@ -30,7 +30,7 @@ const userInfo = new UserInfo(profileSpanArray);
 
 api.getUserInfo().then((res) => {
   console.log(res);
-  userInfo.setUserInfo(res.name, res.about);
+  userInfo.setUserInfo({ nameInput: res.name, aboutInput: res.about });
 });
 
 api
@@ -38,17 +38,18 @@ api
   .then((res) => {
     section.renderItems(res);
   })
-  .catch(console.log);
+  .catch(console.log());
 
-const submiteProfileFormInputs = (data) => {
+const submitProfileFormInputs = (data) => {
   api
     .setUserInfo(data.name, data.about)
     .then((data) => {
+      console.log(data);
       userInfo.setUserInfo({ nameInput: data.name, aboutInput: data.about });
     })
     .catch((err) => console.log(err, "sommthing went wrong"))
     .finally(() => {
-      profilePopup.close();
+      profileForm.close();
     });
 };
 const section = new Section({ renderer: renderCard }, galleryWrap);
@@ -84,6 +85,7 @@ const handleProfileFormInputs = (data) => {
 const resetAndOpenProfileForm = () => {
   formValidators[formProfile.getAttribute("name")].resetValidation();
   const profileData = userInfo.getUserInfo();
+  console.log(profileData);
   handleProfileFormInputs(profileData);
   profileForm.open();
 };
@@ -103,7 +105,7 @@ enableValidation();
 const popupWithImage = new PopupWithImage(openImgView);
 popupWithImage.setEventListeners();
 
-const profileForm = new PopupWithForm(profilePopup, submiteProfileFormInputs);
+const profileForm = new PopupWithForm(profilePopup, submitProfileFormInputs);
 profileForm.setEventListeners();
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
