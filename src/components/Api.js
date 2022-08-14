@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
@@ -29,13 +27,13 @@ class Api {
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))
     );
   }
-  setUserInfo(nameInput, aboutInput) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  setUserInfo({ name, about }) {
+    return fetch(this._baseUrl + `/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        nameInput,
-        aboutInput,
+        name,
+        about,
       }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))

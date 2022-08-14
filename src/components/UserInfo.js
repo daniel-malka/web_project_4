@@ -9,8 +9,8 @@ export class UserInfo {
       about: this._userAbout.textContent,
     };
   }
-  setUserInfo({ name, about }) {
-    this._userName.textContent = name;
-    this._userAbout.textContent = about;
+  setUserInfo({ nameInput, aboutInput }) {
+    this._userName.textContent = nameInput;
+    this._userAbout.textContent = aboutInput;
   }
 }

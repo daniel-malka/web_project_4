@@ -29,7 +29,7 @@ const renderCard = (data) => {
 const userInfo = new UserInfo(profileSpanArray);
 
 api.getUserInfo().then((res) => {
-  console.log(res);
+  console.log(res.name);
   userInfo.setUserInfo({ nameInput: res.name, aboutInput: res.about });
 });
 
@@ -41,26 +41,21 @@ api
   .catch(console.log());
 
 const submitProfileFormInputs = (data) => {
+  console.log;
   api
-    .setUserInfo(data.name, data.about)
+    .setUserInfo({ name: data.name, about: data.about })
     .then((data) => {
-      console.log(data);
-      userInfo.setUserInfo({ nameInput: data.name, aboutInput: data.about });
+      userInfo.setUserInfo({
+        name: data.name,
+        about: data.about,
+      });
     })
-    .catch((err) => console.log(err, "sommthing went wrong"))
+    .catch((err) => console.log(err, "something went wrong.. =/"))
     .finally(() => {
       profileForm.close();
     });
 };
 const section = new Section({ renderer: renderCard }, galleryWrap);
-
-// fetch("https://around.nomoreparties.co/v1/cohort-3-en/cards")
-//   .then((res) => {
-//     return res.json();
-//   })
-//   .then((res) => {
-//     section.renderItems(res);
-//   });
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
 const enableValidation = () => {
@@ -76,8 +71,9 @@ const resetAndOpenImgAddForm = () => {
   formValidators[formImg.getAttribute("name")].resetValidation();
   addCardForm.open();
 };
-const handleProfileFormInputs = (data) => {
+const handleProfileFormInputs = () => {
   const { name, about } = userInfo.getUserInfo();
+  console.log(name, about);
   nameInput.value = name;
   aboutInput.value = about;
 };
@@ -85,7 +81,6 @@ const handleProfileFormInputs = (data) => {
 const resetAndOpenProfileForm = () => {
   formValidators[formProfile.getAttribute("name")].resetValidation();
   const profileData = userInfo.getUserInfo();
-  console.log(profileData);
   handleProfileFormInputs(profileData);
   profileForm.open();
 };
