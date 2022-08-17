@@ -15,14 +15,30 @@ class Api {
     }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
 
-  addCard() {
+  addCard({ name, link }) {
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       body: JSON.stringify({
-        title: title,
+        name: name,
         link: link,
       }),
       headers: this._headers,
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
+    );
+  }
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      headers: this._headers,
+      method: "DELETE",
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
+    );
+  }
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      headers: this._headers,
+      method: "PUT",
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))
     );

@@ -19,6 +19,7 @@ import {
   aboutInput,
 } from "../utilities/constants";
 import { api } from "../components/Api";
+
 const renderCard = (data) => {
   const card = createCard(data);
 
@@ -27,27 +28,32 @@ const renderCard = (data) => {
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
+let userId;
+
+Promise.all([api.getUserInfo(), api.getCardsInfo()])
+  .then(([userInfo, cards]) => {
+    userId = userInfo;
+    userInfo, section.renderItems(cards);
+  })
+  .catch(console.log());
 
 api.getUserInfo().then((res) => {
-  console.log(res.name);
-  userInfo.setUserInfo({ nameInput: res.name, aboutInput: res.about });
+  res.forEach;
 });
 
 api
   .getCardsInfo()
   .then((res) => {
-    section.renderItems(res);
+    // card.setLikes(res.likes);
   })
-  .catch(console.log());
-
+  .catch(console.log);
 const submitProfileFormInputs = (data) => {
-  console.log;
   api
     .setUserInfo({ name: data.name, about: data.about })
     .then((data) => {
       userInfo.setUserInfo({
-        name: data.name,
-        about: data.about,
+        nameInput: data.name,
+        aboutInput: data.about,
       });
     })
     .catch((err) => console.log(err, "something went wrong.. =/"))
@@ -55,6 +61,39 @@ const submitProfileFormInputs = (data) => {
       profileForm.close();
     });
 };
+
+const createCard = (data) => {
+  const card = new Card(
+    data,
+    templateSelector,
+    (name, link) => {
+      popupWithImage.open(name, link);
+    },
+    () => {
+      api.addLike(card.getId()).then((res) => {
+        card.setLikes(res.likes);
+        console.log(res);
+      });
+    }
+  );
+  return card.createCard();
+};
+
+const addCardForm = new PopupWithForm(addCardPopup, (data) => {
+  api
+    .addCard({ name: data.title, link: data.link })
+    .then((res) => {
+      renderCard(
+        {
+          name: res.name,
+          link: res.link,
+        },
+        galleryWrap
+      );
+      addCardForm.close();
+    })
+    .catch(console.log);
+});
 const section = new Section({ renderer: renderCard }, galleryWrap);
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
@@ -73,7 +112,6 @@ const resetAndOpenImgAddForm = () => {
 };
 const handleProfileFormInputs = () => {
   const { name, about } = userInfo.getUserInfo();
-  console.log(name, about);
   nameInput.value = name;
   aboutInput.value = about;
 };
@@ -83,13 +121,6 @@ const resetAndOpenProfileForm = () => {
   const profileData = userInfo.getUserInfo();
   handleProfileFormInputs(profileData);
   profileForm.open();
-};
-
-const createCard = (data) => {
-  const card = new Card(data, templateSelector, (name, link) => {
-    popupWithImage.open(name, link);
-  });
-  return card.createCard();
 };
 
 enableValidation();
@@ -103,23 +134,6 @@ popupWithImage.setEventListeners();
 const profileForm = new PopupWithForm(profilePopup, submitProfileFormInputs);
 profileForm.setEventListeners();
 
-const addCardForm = new PopupWithForm(addCardPopup, (data) => {
-  api
-    .getCardsInfo()
-    .then((res) => {
-      section.renderItems(res);
-    })
-    .catch(console.log);
-
-  renderCard(
-    {
-      name: data.name,
-      link: data.link,
-    },
-    galleryWrap
-  );
-  addCardForm.close();
-});
 addCardForm.setEventListeners();
 
 //listeners//////////
