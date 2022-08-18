@@ -8,6 +8,9 @@ class Api {
     this._baseUrl = settings.baseUrl;
     this._headers = settings.headers;
   }
+  getInitialCards() {
+    return customFetch(this._baseUrl + "/cards", this._headers);
+  }
   getCardsInfo() {
     return customFetch(this._baseUrl + "/cards", {
       headers: this._headers,
@@ -38,9 +41,7 @@ class Api {
         name: name,
         link: link,
       }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
-    );
+    });
   }
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {

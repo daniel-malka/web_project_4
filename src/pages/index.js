@@ -28,24 +28,22 @@ const renderCard = (data) => {
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
-Promise.all([api.getUserInfo(), api.getCardsInfo()]).then(
-  ([cardsData, userData]) => {
+Promise.all([api.getCardsInfo(), api.getUserInfo()])
+  .then(([cardsData, userData]) => {
     section = new Section(
-      { items: cardsData, renderer: renderCard(cardsData) },
+      { items: cardsData, renderer: (data) => renderCard(data) },
       galleryWrap
     );
-    console.log(String(section));
-    userId = userData._id;
-  }
-);
-userInfo
-  .setUserInfo({ name: data.name, about: data.about })
-
+    (userId = userData._id),
+      userInfo.setUserInfo({ nameInput: data.name, aboutInput: data.about });
+  })
   .catch(console.log);
+api.getInitialCards();
 const submitProfileFormInputs = (data) => {
   api
     .setUserInfo({ name: data.name, about: data.about })
     .then((data) => {
+      console.log(data);
       userInfo.setUserInfo({
         nameInput: data.name,
         aboutInput: data.about,
@@ -89,7 +87,7 @@ const addCardForm = new PopupWithForm(addCardPopup, (data) => {
     })
     .catch(console.log);
 });
-section = new Section({ renderer: renderCard }, galleryWrap);
+// section = new Section({ items: items, renderer: renderCard }, galleryWrap);
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
 const enableValidation = () => {
