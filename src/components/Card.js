@@ -50,10 +50,10 @@ export class Card {
     this._galleryImg.src = this._link;
     const likesNumber = this._cardElement.querySelector(".like__counter");
 
-    likesNumber.textContent = this._likes.length;
+    // likesNumber.textContent = this._likes.length;
     this._galleryImg.alt = this._alt;
 
-    this.setLikes(this._likes.length);
+    this.setLikes(this._likes);
     this._setEventListeners();
 
     return this._cardElement;

@@ -17,34 +17,23 @@ import {
   settings,
   nameInput,
   aboutInput,
+  cards,
+  userId,
 } from "../utilities/constants";
 import { api } from "../components/Api";
 
 const renderCard = (data) => {
-  const card = createCard(data);
-
-  section.addItem(card);
+  section.addItem(createCard(data));
 };
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
-let userId;
 
-Promise.all([api.getUserInfo(), api.getCardsInfo()])
-  .then(([userInfo, cards]) => {
-    userId = userInfo;
-    userInfo, section.renderItems(cards);
-  })
-  .catch(console.log());
-
-api.getUserInfo().then((res) => {
-  res.forEach;
-});
-
+api.getUserInfo();
 api
   .getCardsInfo()
   .then((res) => {
-    // card.setLikes(res.likes);
+    console.log(res);
   })
   .catch(console.log);
 const submitProfileFormInputs = (data) => {
@@ -73,7 +62,7 @@ const createCard = (data) => {
       api.addLike(card.getId()).then((res) => {
         card.setLikes(res.likes);
         console.log(res);
-      });
+      }); 
     }
   );
   return card.createCard();

@@ -20,7 +20,8 @@ const settings = {
   inputErrorClass: "fieldset__input_error",
   spanErrorClass: "fieldset__error-message-active",
 };
-
+let userId;
+let cards;
 export {
   galleryWrap,
   addCardPopup,
@@ -33,4 +34,6 @@ export {
   openProfileEditButton,
   openImgAddPopup,
   settings,
+  userId,
+  cards,
 };

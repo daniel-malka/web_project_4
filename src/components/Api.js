@@ -1,28 +1,43 @@
+const customFetch = (url, headers) => {
+  fetch(url, headers)
+    .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
+    .catch(console.log());
+};
 class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
     this._headers = settings.headers;
   }
-
-  getUserInfo() {
-    return fetch(this._baseUrl + "/users/me", {
-      headers: this._headers,
-    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
-  }
   getCardsInfo() {
-    return fetch(this._baseUrl + "/cards", {
+    return customFetch(this._baseUrl + "/cards", {
       headers: this._headers,
-    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
+    });
+  }
+  getUserInfo() {
+    return customFetch(this._baseUrl + "/users/me", {
+      headers: this._headers,
+    });
+  }
+
+  setUserInfo({ name, about }) {
+    return customFetch(this._baseUrl + `/users/me`, {
+      headers: this._headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    });
   }
 
   addCard({ name, link }) {
-    return fetch(this._baseUrl + "/cards", {
+    return customFetch(this._baseUrl + "/cards", {
+      headers: this._headers,
       method: "POST",
       body: JSON.stringify({
         name: name,
         link: link,
       }),
-      headers: this._headers,
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))
     );
@@ -39,18 +54,6 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
-    );
-  }
-  setUserInfo({ name, about }) {
-    return fetch(this._baseUrl + `/users/me`, {
-      headers: this._headers,
-      method: "PATCH",
-      body: JSON.stringify({
-        name,
-        about,
-      }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(console.log(res.statusText))
     );
