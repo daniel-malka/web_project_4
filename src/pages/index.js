@@ -17,7 +17,7 @@ import {
   settings,
   nameInput,
   aboutInput,
-  cards,
+  section,
   userId,
 } from "../utilities/constants";
 import { api } from "../components/Api";
@@ -28,13 +28,19 @@ const renderCard = (data) => {
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
+Promise.all([api.getUserInfo(), api.getCardsInfo()]).then(
+  ([cardsData, userData]) => {
+    section = new Section(
+      { items: cardsData, renderer: renderCard(cardsData) },
+      galleryWrap
+    );
+    console.log(String(section));
+    userId = userData._id;
+  }
+);
+userInfo
+  .setUserInfo({ name: data.name, about: data.about })
 
-api.getUserInfo();
-api
-  .getCardsInfo()
-  .then((res) => {
-    console.log(res);
-  })
   .catch(console.log);
 const submitProfileFormInputs = (data) => {
   api
@@ -62,7 +68,7 @@ const createCard = (data) => {
       api.addLike(card.getId()).then((res) => {
         card.setLikes(res.likes);
         console.log(res);
-      }); 
+      });
     }
   );
   return card.createCard();
@@ -83,7 +89,7 @@ const addCardForm = new PopupWithForm(addCardPopup, (data) => {
     })
     .catch(console.log);
 });
-const section = new Section({ renderer: renderCard }, galleryWrap);
+section = new Section({ renderer: renderCard }, galleryWrap);
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
 const enableValidation = () => {

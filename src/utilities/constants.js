@@ -21,7 +21,7 @@ const settings = {
   spanErrorClass: "fieldset__error-message-active",
 };
 let userId;
-let cards;
+let section;
 export {
   galleryWrap,
   addCardPopup,
@@ -35,5 +35,5 @@ export {
   openImgAddPopup,
   settings,
   userId,
-  cards,
+  section,
 };
