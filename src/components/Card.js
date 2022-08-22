@@ -1,23 +1,24 @@
 export class Card {
-  constructor(data, selector, handleCardClick, handleLikeButton, userId) {
+  constructor(data, userId, selector, handleCardClick, handleLikeButton) {
     this._name = data.name;
+    this._userId = userId._id;
     this._link = data.link;
     this._likes = data.likes;
-
+    this._likedByOwner = data.owner._id;
     this._id = data._id;
     this._handleCardClick = handleCardClick;
     this._handleLikeButton = handleLikeButton;
-
     this._alt = `Photo of ${data.name}`;
     this._templateElement = selector;
   }
-
+  getOwner() {
+    console.log(this._owner);
+  }
+  isLiked() {
+    return this._likes.some((like) => like._id == this._likedByOwner);
+  }
   getId() {
     return this._id;
-  }
-  likeCard(newLike) {
-    this._likes = newLike;
-    this.likeAmount.textContent = this._likes.length;
   }
   _removeCard = () => this._cardElement.remove();
 
@@ -35,7 +36,16 @@ export class Card {
     );
   }
 
-  setLikes(newLikes) {}
+  setLikes(newLikes) {
+    this._likes = newLikes;
+    const likesAmount = this._likes.length;
+    this._cardElement.querySelector(".like__counter").textContent = likesAmount;
+    const cardIsLikedByCurrentUser = false;
+    if (cardIsLikedByCurrentUser) {
+      this._toggleHeart();
+    }
+  }
+
   createCard() {
     this._cardElement = document
       .querySelector(this._templateElement)
@@ -48,12 +58,10 @@ export class Card {
     this._likeCard = this._cardElement.querySelector(".like__button");
     this._galleryText.textContent = this._name;
     this._galleryImg.src = this._link;
-    const likesNumber = this._cardElement.querySelector(".like__counter");
 
-    // likesNumber.textContent = this._likes.length;
     this._galleryImg.alt = this._alt;
-
     this.setLikes(this._likes);
+
     this._setEventListeners();
 
     return this._cardElement;

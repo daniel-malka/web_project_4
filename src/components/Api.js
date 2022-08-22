@@ -1,15 +1,20 @@
-const customFetch = (url, headers) => {
-  fetch(url, headers)
+const customFetch = async (url, headers) => {
+  return await fetch(url, headers)
     .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-    .catch(console.log());
+    .catch((err) => {
+      console.log(err);
+    });
 };
+
 class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
     this._headers = settings.headers;
   }
   getInitialCards() {
-    return customFetch(this._baseUrl + "/cards", this._headers);
+    return customFetch(this._baseUrl + "/cards", {
+      headers: this._headers,
+    });
   }
   getCardsInfo() {
     return customFetch(this._baseUrl + "/cards", {
@@ -44,20 +49,17 @@ class Api {
     });
   }
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return customFetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE",
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
-    );
+    });
   }
   addLike(id) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    console.log(id);
+    return customFetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(console.log(res.statusText))
-    );
+    });
   }
 }
 export const api = new Api({

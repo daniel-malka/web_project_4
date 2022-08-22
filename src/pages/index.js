@@ -17,10 +17,12 @@ import {
   settings,
   nameInput,
   aboutInput,
-  section,
-  userId,
 } from "../utilities/constants";
 import { api } from "../components/Api";
+let userId;
+const section = new Section((data) => {
+  renderCard(data);
+}, galleryWrap);
 
 const renderCard = (data) => {
   section.addItem(createCard(data));
@@ -28,17 +30,24 @@ const renderCard = (data) => {
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
-Promise.all([api.getCardsInfo(), api.getUserInfo()])
-  .then(([cardsData, userData]) => {
-    section = new Section(
-      { items: cardsData, renderer: (data) => renderCard(data) },
-      galleryWrap
-    );
-    (userId = userData._id),
-      userInfo.setUserInfo({ nameInput: data.name, aboutInput: data.about });
+Promise.all([api.getUserInfo(), api.getCardsInfo()])
+  .then(([userData, cardsData]) => {
+    // sectionNew = new Section(
+    //     {
+    //         items: cardsData,
+    //         renderer: (data) => {
+    //             renderCard(data);
+    //         },
+    //     },
+    //     galleryWrap
+    userId = userData._id;
+    userInfo.setUserInfo({
+      nameInput: userData.name,
+      aboutInput: userData.about,
+    });
+    section.renderInitialItems(cardsData);
   })
   .catch(console.log);
-api.getInitialCards();
 const submitProfileFormInputs = (data) => {
   api
     .setUserInfo({ name: data.name, about: data.about })
@@ -58,14 +67,16 @@ const submitProfileFormInputs = (data) => {
 const createCard = (data) => {
   const card = new Card(
     data,
+    userId,
     templateSelector,
     (name, link) => {
       popupWithImage.open(name, link);
     },
     () => {
       api.addLike(card.getId()).then((res) => {
+        //fill like
         card.setLikes(res.likes);
-        console.log(res);
+        console.log();
       });
     }
   );
@@ -74,7 +85,7 @@ const createCard = (data) => {
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
   api
-    .addCard({ name: data.title, link: data.link })
+    .addCard({ name: data.name, link: data.link })
     .then((res) => {
       renderCard(
         {
@@ -87,7 +98,6 @@ const addCardForm = new PopupWithForm(addCardPopup, (data) => {
     })
     .catch(console.log);
 });
-// section = new Section({ items: items, renderer: renderCard }, galleryWrap);
 
 const formValidators = { formImg: "formImg", formProfile: "formProfile" };
 const enableValidation = () => {
