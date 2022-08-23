@@ -22,28 +22,26 @@ export class Card {
   }
   _removeCard = () => this._cardElement.remove();
 
-  _toggleHeart = () => {
-    this._likeCard.classList.toggle("button_liked");
-  };
-  _handleLikes(id) {
-    this._handleLikeButton(id);
-  }
   _setEventListeners() {
     this._deleteCard.addEventListener("click", () => this._removeCard());
-    this._likeCard.addEventListener("click", () => this._handleLikes(this._id));
+    this._likeCard.addEventListener("click", () =>
+      this._handleLikeButton(this._id)
+    );
     this._galleryImg.addEventListener("click", () =>
       this._handleCardClick(this._name, this._link)
     );
+  }
+  addLike() {
+    this._likeCard.classList.add("button_liked");
+  }
+  removeLike() {
+    this._likeCard.classList.remove("button_liked");
   }
 
   setLikes(newLikes) {
     this._likes = newLikes;
     const likesAmount = this._likes.length;
     this._cardElement.querySelector(".like__counter").textContent = likesAmount;
-    const cardIsLikedByCurrentUser = false;
-    if (cardIsLikedByCurrentUser) {
-      this._toggleHeart();
-    }
   }
 
   createCard() {

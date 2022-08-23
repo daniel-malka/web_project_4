@@ -60,7 +60,7 @@ class Api {
       method: "DELETE",
     });
   }
-  addLike(id) {
+  likeCard(id) {
     return customFetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",

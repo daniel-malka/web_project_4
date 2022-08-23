@@ -71,11 +71,13 @@ const createCard = (data) => {
           .dislikeCard(id)
           .then((res) => {
             card.setLikes(res.likes);
+            card.removeLike();
           })
           .catch(console.log());
       } else {
-        api.addLike(id).then((res) => {
+        api.likeCard(id).then((res) => {
           card.setLikes(res.likes);
+          card.addLike();
         });
       }
     }
