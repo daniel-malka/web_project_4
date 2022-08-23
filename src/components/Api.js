@@ -54,8 +54,13 @@ class Api {
       method: "DELETE",
     });
   }
+  dislikeCard(id) {
+    return customFetch(`${this._baseUrl}/cards/likes/${id}`, {
+      headers: this._headers,
+      method: "DELETE",
+    });
+  }
   addLike(id) {
-    console.log(id);
     return customFetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",

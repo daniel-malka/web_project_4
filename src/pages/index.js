@@ -32,14 +32,6 @@ const renderCard = (data) => {
 const userInfo = new UserInfo(profileSpanArray);
 Promise.all([api.getUserInfo(), api.getCardsInfo()])
   .then(([userData, cardsData]) => {
-    // sectionNew = new Section(
-    //     {
-    //         items: cardsData,
-    //         renderer: (data) => {
-    //             renderCard(data);
-    //         },
-    //     },
-    //     galleryWrap
     userId = userData._id;
     userInfo.setUserInfo({
       nameInput: userData.name,
@@ -72,14 +64,34 @@ const createCard = (data) => {
     (name, link) => {
       popupWithImage.open(name, link);
     },
-    () => {
-      api.addLike(card.getId()).then((res) => {
-        //fill like
-        card.setLikes(res.likes);
-        console.log();
-      });
+    (id) => {
+      const isLiked = card.isLiked();
+      if (isLiked) {
+        api
+          .dislikeCard(id)
+          .then((res) => {
+            card.setLikes(res.likes);
+          })
+          .catch(console.log());
+      } else {
+        api.addLike(id).then((res) => {
+          card.setLikes(res.likes);
+        });
+      }
     }
   );
+  //  const isAlreadyLiked = card.isLiked();
+
+  //         if (isAlreadyLiked) {
+  //           api.dislikeCard(id).then((res) => {
+  //             card.likeCard(res.likes);
+  //           }).catch(console.log); ;
+  //         } else {
+  //           api.likeCard(id).then((res) => {
+  //             card.likeCard(res.likes);
+  //           }).catch(console.log); ;
+  //         }
+  //       },
   return card.createCard();
 };
 

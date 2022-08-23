@@ -25,12 +25,12 @@ export class Card {
   _toggleHeart = () => {
     this._likeCard.classList.toggle("button_liked");
   };
-  _handleLikes() {
-    this._handleLikeButton();
+  _handleLikes(id) {
+    this._handleLikeButton(id);
   }
   _setEventListeners() {
     this._deleteCard.addEventListener("click", () => this._removeCard());
-    this._likeCard.addEventListener("click", () => this._handleLikes());
+    this._likeCard.addEventListener("click", () => this._handleLikes(this._id));
     this._galleryImg.addEventListener("click", () =>
       this._handleCardClick(this._name, this._link)
     );
