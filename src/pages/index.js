@@ -99,15 +99,9 @@ const createCard = (data) => {
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
   api
-    .addCard({ name: data.name, link: data.link })
+    .addCard({ name: data.title, link: data.link })
     .then((res) => {
-      renderCard(
-        {
-          name: res.name,
-          link: res.link,
-        },
-        galleryWrap
-      );
+      renderCard(res, galleryWrap);
       addCardForm.close();
     })
     .catch(console.log);
