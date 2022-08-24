@@ -1,5 +1,5 @@
-const customFetch = async (url, headers) => {
-  return await fetch(url, headers)
+const customFetch = (url, headers) => {
+  return fetch(url, headers)
     .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
     .catch((err) => {
       console.log(err);
@@ -11,12 +11,7 @@ class Api {
     this._baseUrl = settings.baseUrl;
     this._headers = settings.headers;
   }
-  getInitialCards() {
-    return customFetch(this._baseUrl + "/cards", {
-      headers: this._headers,
-    });
-  }
-  getCardsInfo() {
+  getCards() {
     return customFetch(this._baseUrl + "/cards", {
       headers: this._headers,
     });

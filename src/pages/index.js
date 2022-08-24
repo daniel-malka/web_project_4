@@ -30,7 +30,7 @@ const renderCard = (data) => {
 //functions/////////////////////////////
 ////////////////////////////////////////
 const userInfo = new UserInfo(profileSpanArray);
-Promise.all([api.getUserInfo(), api.getCardsInfo()])
+Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cardsData]) => {
     userId = userData._id;
     userInfo.setUserInfo({
