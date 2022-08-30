@@ -27,8 +27,7 @@ class Api {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name,
-        about,
+        avatar,
       }),
     });
   }
@@ -37,6 +36,16 @@ class Api {
     return customFetch(this._baseUrl + "/cards", {
       headers: this._headers,
       method: "POST",
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    });
+  }
+  editAvatar(avatar) {
+    return customFetch(this._baseUrl + "/users/me/avatar", {
+      headers: this._headers,
+      method: "PATCH",
       body: JSON.stringify({
         name: name,
         link: link,

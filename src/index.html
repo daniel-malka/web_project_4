@@ -161,13 +161,87 @@
             </form>
           </div>
         </div>
+
+        <div class="popup popup__type_delete">
+          <div id="card-delete" class="popup__container">
+            <button
+              type="button"
+              aria-label="button"
+              class="popup__close popup__close_type-delete"
+            ></button>
+            <h3 class="popup__title">Are you sure?</h3>
+            <form
+              novalidate
+              name="formDelete"
+              class="form form_type_delete"
+              id="form__delete"
+            >
+              <fieldset class="fieldset">
+                <button
+                  name="delete"
+                  type="submit"
+                  class="fieldset__button fieldset__button_type_delete"
+                >
+                  Delete
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <div class="popup popup__type_avatar">
+          <div id="change-avatar" class="popup__container">
+            <button
+              type="button"
+              aria-label="button"
+              class="popup__close popup__close_type-avatar"
+            ></button>
+            <h3 class="popup__title">Change profile picture</h3>
+            <form
+              novalidate
+              name="formavatar"
+              class="form form_type_avatar"
+              id="form__avatar"
+            >
+              <fieldset class="fieldset">
+                <div class="fieldset__container">
+                  <input
+                    type="url"
+                    id="link"
+                    name="link"
+                    value=""
+                    placeholder="Link"
+                    class="fieldset__input fieldset__input_type_link"
+                    required
+                  />
+                  <span
+                    class="fieldset__error-message fieldset__error-type-link"
+                  ></span>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset">
+                <button
+                  name="create"
+                  type="submit"
+                  class="fieldset__button fieldset__button_type_create"
+                >
+                  Create
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
         <!-- // ------------------------------------------------------------------------------------------------ // -->
         <section class="top">
-          <img
-            src="<%=require('./images/header__img.png')%>"
-            alt="Profile picture"
-            class="top__img"
-          />
+          <div class="top__container">
+            <img
+              src="<%=require('./images/header__img.png')%>"
+              alt="Profile picture"
+              class="top__img"
+            />
+          </div>
+
           <div class="text">
             <div class="text__title">
               <h1 class="text__name">Jacques Cousteau</h1>
@@ -179,6 +253,7 @@
             </div>
             <p class="text__about">Explorer</p>
           </div>
+          <!---->
           <button
             type="button"
             aria-label="button"
