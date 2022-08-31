@@ -17,13 +17,13 @@ class Api {
     });
   }
   getUserInfo() {
-    return customFetch(this._baseUrl + "/users/me", {
+    return customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     });
   }
 
   setUserInfo({ name, about }) {
-    return customFetch(this._baseUrl + `/users/me`, {
+    return customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
@@ -33,7 +33,7 @@ class Api {
   }
 
   addCard({ name, link }) {
-    return customFetch(this._baseUrl + "/cards", {
+    return customFetch(`${this._baseUrl} /cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify({
@@ -43,12 +43,11 @@ class Api {
     });
   }
   editAvatar(avatar) {
-    return customFetch(this._baseUrl + "/users/me/avatar", {
+    return customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: name,
-        link: link,
+        avatar,
       }),
     });
   }

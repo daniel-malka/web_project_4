@@ -5,13 +5,13 @@ const profilePopup = ".popup_type_profile";
 const openImgView = ".popup_type_zoom";
 const nameInput = document.forms.formProfile.elements.name;
 const aboutInput = document.forms.formProfile.elements.about;
-const avatarInput = document.forms.formavatar.elements.link;
+const avatarInput = document.forms.formAvatar.elements.link;
 const templateSelector = "#gallery__item";
 const profileSpanArray = {
   name: ".text__name",
   about: ".text__about",
+  avatar: ".top__img",
 };
-const openAvatarPopup = document.querySelector(".top__img");
 const openProfilePopup = document.querySelector(".text__edit");
 const openImgAddPopup = document.querySelector(".top__plus-box");
 //settings
@@ -35,7 +35,7 @@ export {
   avatarInput,
   templateSelector,
   profileSpanArray,
-  openAvatarPopup,
+
   openProfilePopup,
   openImgAddPopup,
   settings,

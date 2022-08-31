@@ -15,7 +15,6 @@ import {
   openImgView,
   templateSelector,
   profileSpanArray,
-  openAvatarPopup,
   openProfilePopup,
   openImgAddPopup,
   settings,
@@ -23,6 +22,7 @@ import {
   aboutInput,
   avatarInput,
 } from "../utilities/constants";
+import { data } from "autoprefixer";
 const confirmPopup = new PopupWithSubmit(".popup__type_delete");
 confirmPopup.setEventListeners();
 let userId;
@@ -50,7 +50,6 @@ const submitProfileFormInputs = (data) => {
   api
     .setUserInfo({ name: data.name, about: data.about })
     .then((data) => {
-      console.log(data);
       userInfo.setUserInfo({
         nameInput: data.name,
         aboutInput: data.about,
@@ -93,7 +92,6 @@ const createCard = (data) => {
         api
           .deleteCard(cardId)
           .then((res) => {
-            console.log("res", res);
             card.removeCard();
             confirmPopup.close();
           })
@@ -114,7 +112,11 @@ const addCardForm = new PopupWithForm(addCardPopup, (data) => {
     .catch(console.log);
 });
 
-const formValidators = { formImg: "formImg", formProfile: "formProfile" };
+const formValidators = {
+  formAvatar: "formAvatar",
+  formImg: "formImg",
+  formProfile: "formProfile",
+};
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(".form"));
   formList.forEach((formEl) => {
@@ -125,14 +127,19 @@ const enableValidation = () => {
   });
 };
 const resetAndOpenAvatarForm = () => {
-  formValidators[formImg.getAttribute("name")].resetValidation();
-  avatarInput.value = openAvatarPopup.src;
+  formValidators[formAvatar.getAttribute("name")].resetValidation();
 };
-const handleAvatarSubmit = () => {};
+const handleAvatarSubmit = (data) => {
+  api.editAvatar(data.link).then((res) => {
+    userInfo.setAvatarInfo(res.avatar);
+  });
+};
+
 const resetAndOpenImgAddForm = () => {
   formValidators[formImg.getAttribute("name")].resetValidation();
   addCardForm.open();
 };
+
 const handleProfileFormInputs = () => {
   const { name, about } = userInfo.getUserInfo();
   nameInput.value = name;
@@ -157,7 +164,9 @@ popupWithImage.setEventListeners();
 const profileForm = new PopupWithForm(profilePopup, submitProfileFormInputs);
 profileForm.setEventListeners();
 
-const profileAvatar = new PopupWithForm(avatarPopup, () => {});
+const profileAvatar = new PopupWithForm(avatarPopup, (data) => {
+  handleAvatarSubmit(data);
+});
 
 addCardForm.setEventListeners();
 
@@ -169,8 +178,10 @@ openImgAddPopup.addEventListener("click", () => resetAndOpenImgAddForm());
 openProfilePopup.addEventListener("click", () => {
   resetAndOpenProfileForm();
 });
-
-openAvatarPopup.addEventListener("click", () => {
-  profileAvatar.setEventListeners();
-  profileAvatar.open();
-});
+profileAvatar.setEventListeners();
+document
+  .querySelector(profileSpanArray.avatar)
+  .addEventListener("click", () => {
+    resetAndOpenAvatarForm();
+    profileAvatar.open();
+  });

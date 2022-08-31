@@ -24,7 +24,6 @@ export class PopupWithForm extends Popup {
 
       this._handleForm(this._valuesFromForm);
       super.close();
-      console.log(this._valuesFromForm);
     });
   }
   setInputValues(data) {
