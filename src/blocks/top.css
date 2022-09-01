@@ -16,6 +16,7 @@
   margin-right: 30px;
 }
 .top__img:hover {
+  opacity: 0.6;
   cursor: pointer;
 }
 .top__img::after {
@@ -23,16 +24,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 120px;
-}
-
-.top__img:hover:after {
-  content: "";
-  background-color: white;
   background-image: url(../images/pen.svg);
   background-position: center;
-  cursor: pointer;
-  transition: opacity 200ms ease-in-out;
+  background-repeat: no-repeat;
+  width: 120px;
 }
 
 .top__plus-box {

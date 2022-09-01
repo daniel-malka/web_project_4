@@ -43,7 +43,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
       nameInput: userData.name,
       aboutInput: userData.about,
     });
-    userInfo.setAvatarInfo(avatarInput);
+    userInfo.setAvatarInfo(userData.avatar);
     section.renderInitialItems(cardsData);
   })
   .catch(console.log);
@@ -135,7 +135,7 @@ const handleAvatarSubmit = (data) => {
   console.log(data);
   api.editAvatar(data.link).then((res) => {
     console.log(res);
-    userInfo.setAvatarInfo(res.avatarQ);
+    userInfo.setAvatarInfo(res.avatar);
   });
 };
 
