@@ -15,6 +15,7 @@ import {
   openImgView,
   templateSelector,
   profileSpanArray,
+  openAvatarPopup,
   openProfilePopup,
   openImgAddPopup,
   settings,
@@ -133,7 +134,7 @@ const resetAndOpenAvatarForm = () => {
 };
 const handleAvatarSubmit = (data) => {
   console.log(data);
-  api.editAvatar(data.link).then((res) => {
+  api.editAvatar(data.url).then((res) => {
     console.log(res);
     userInfo.setAvatarInfo(res.avatar);
   });
@@ -183,9 +184,7 @@ openProfilePopup.addEventListener("click", () => {
   resetAndOpenProfileForm();
 });
 profileAvatar.setEventListeners();
-document
-  .querySelector(profileSpanArray.avatar)
-  .addEventListener("click", () => {
-    resetAndOpenAvatarForm();
-    profileAvatar.open();
-  });
+openAvatarPopup.addEventListener("click", () => {
+  resetAndOpenAvatarForm();
+  profileAvatar.open();
+});

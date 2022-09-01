@@ -12,8 +12,12 @@ const profileSpanArray = {
   about: ".text__about",
   avatar: ".top__img",
 };
+
 const openProfilePopup = document.querySelector(".text__edit");
 const openImgAddPopup = document.querySelector(".top__plus-box");
+const openAvatarPopup = document.querySelector(
+  ".top__container_image-container"
+);
 //settings
 const settings = {
   inputSelector: ".fieldset__input",
@@ -35,7 +39,7 @@ export {
   avatarInput,
   templateSelector,
   profileSpanArray,
-
+  openAvatarPopup,
   openProfilePopup,
   openImgAddPopup,
   settings,
