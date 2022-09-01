@@ -43,17 +43,19 @@ Promise.all([api.getUserInfo(), api.getCards()])
       nameInput: userData.name,
       aboutInput: userData.about,
     });
+    userInfo.setAvatarInfo(avatarInput);
     section.renderInitialItems(cardsData);
   })
   .catch(console.log);
 const submitProfileFormInputs = (data) => {
   api
-    .setUserInfo({ name: data.name, about: data.about })
+    .setUserInfo({ name: data.name, about: data.about, avatar: data.avatar })
     .then((data) => {
       userInfo.setUserInfo({
         nameInput: data.name,
         aboutInput: data.about,
       });
+      userInfo.setAvatarInfo(avatar);
     })
     .catch((err) => console.log(err, "something went wrong.. =/"))
     .finally(() => {
@@ -130,8 +132,10 @@ const resetAndOpenAvatarForm = () => {
   formValidators[formAvatar.getAttribute("name")].resetValidation();
 };
 const handleAvatarSubmit = (data) => {
+  console.log(data);
   api.editAvatar(data.link).then((res) => {
-    userInfo.setAvatarInfo(res.avatar);
+    console.log(res);
+    userInfo.setAvatarInfo(res.avatarQ);
   });
 };
 

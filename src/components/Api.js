@@ -12,7 +12,7 @@ class Api {
     this._headers = settings.headers;
   }
   getCards() {
-    return customFetch(this._baseUrl + "/cards", {
+    return customFetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     });
   }
@@ -27,13 +27,14 @@ class Api {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        avatar,
+        name: name,
+        about: about,
       }),
     });
   }
 
   addCard({ name, link }) {
-    return customFetch(`${this._baseUrl} /cards`, {
+    return customFetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify({
@@ -47,7 +48,7 @@ class Api {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        avatar,
+        avatar: avatar,
       }),
     });
   }

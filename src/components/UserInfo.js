@@ -8,6 +8,7 @@ export class UserInfo {
     return {
       name: this._userName.textContent,
       about: this._userAbout.textContent,
+      avatar: this._userAvatar.src,
     };
   }
   setUserInfo({ nameInput, aboutInput }) {
