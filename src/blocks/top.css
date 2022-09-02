@@ -31,7 +31,7 @@
   transition: background-color 0.4s ease-out;
 }
 .top__container_image-container:hover::before {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   background-image: url("../images/bigPen.svg");
   background-repeat: no-repeat;
   background-position: center;

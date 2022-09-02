@@ -1,5 +1,5 @@
 const galleryWrap = ".gallery";
-const avatarPopup = ".popup__type_avatar";
+const avatarPopup = ".popup_type_avatar";
 const addCardPopup = ".popup_type_card";
 const profilePopup = ".popup_type_profile";
 const openImgView = ".popup_type_zoom";
