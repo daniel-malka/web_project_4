@@ -8,7 +8,7 @@
 .top__container {
   position: relative;
 }
-.top__container_image-container {
+.top__container-image {
   margin-right: 30px;
 }
 .top__img {
@@ -18,7 +18,7 @@
   object-fit: cover;
 }
 
-.top__container_image-container::before {
+.top__container-image::before {
   cursor: pointer;
   content: "";
   display: block;
