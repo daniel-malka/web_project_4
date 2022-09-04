@@ -1,5 +1,9 @@
 import { Popup } from "./Popup";
 class PopupWithSubmit extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+    this.popup = document.querySelector(popupSelector);
+  }
   setAction(action) {
     this._submitHandler = action;
   }

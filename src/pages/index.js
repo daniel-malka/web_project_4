@@ -6,7 +6,7 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import PopupWithSubmit from "../components/PopupWithSubmit";
 import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
-import { api } from "../components/Api";
+
 import {
   galleryWrap,
   avatarPopup,
@@ -22,11 +22,15 @@ import {
   nameInput,
   aboutInput,
   avatarInput,
+  api,
 } from "../utilities/constants";
-import { data } from "autoprefixer";
-const confirmPopup = new PopupWithSubmit(".popup__type_delete");
+
+const confirmPopup = new PopupWithSubmit(".popup_type_delete");
+
 confirmPopup.setEventListeners();
+
 let userId;
+
 const section = new Section((data) => {
   renderCard(data);
 }, galleryWrap);
@@ -34,8 +38,9 @@ const section = new Section((data) => {
 const renderCard = (data) => {
   section.addItem(createCard(data));
 };
+
 //functions/////////////////////////////
-////////////////////////////////////////
+
 const userInfo = new UserInfo(profileSpanArray);
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cardsData]) => {
@@ -47,21 +52,23 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setAvatarInfo(userData.avatar);
     section.renderInitialItems(cardsData);
   })
-  .catch(console.log);
+  .catch((err) => console.log(`Error somthing went wrong. ${err}`));
+
 const submitProfileFormInputs = (data) => {
   api
     .setUserInfo({ name: data.name, about: data.about, avatar: data.avatar })
     .then((data) => {
+      console.log(data.avatar);
       userInfo.setUserInfo({
         nameInput: data.name,
         aboutInput: data.about,
+        avatarInput: data.avatar,
       });
-      userInfo.setAvatarInfo(avatar);
-    })
-    .catch((err) => console.log(err, "something went wrong.. =/"))
-    .finally(() => {
+      userInfo.setAvatarInfo(data.avatar);
       profileForm.close();
-    });
+    })
+    .catch((err) => console.log(`Error somthing went wrong. ${err}`))
+    .finally(() => {});
 };
 
 const createCard = (data) => {
@@ -73,20 +80,22 @@ const createCard = (data) => {
       popupWithImage.open(name, link);
     },
     (id) => {
-      const isLiked = card.isLiked();
-      if (isLiked) {
+      if (card.isLiked()) {
         api
           .dislikeCard(id)
           .then((res) => {
             card.setLikes(res.likes);
             card.removeLike();
           })
-          .catch(console.log());
+          .catch((err) => console.log(`Error somthing went wrong. ${err}`));
       } else {
-        api.likeCard(id).then((res) => {
-          card.setLikes(res.likes);
-          card.addLike();
-        });
+        api
+          .likeCard(id)
+          .then((res) => {
+            card.setLikes(res.likes);
+            card.addLike();
+          })
+          .catch((err) => console.log(`Error somthing went wrong. ${err}`));
       }
     },
     (cardId) => {
@@ -98,7 +107,8 @@ const createCard = (data) => {
             card.removeCard();
             confirmPopup.close();
           })
-          .catch(console.log());
+          .catch((err) => console.log(`Error somthing went wrong. ${err}`))
+          .finally(() => {});
       });
     }
   );
@@ -106,20 +116,21 @@ const createCard = (data) => {
 };
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
+  addCardForm.renderLoading(true);
   api
     .addCard({ name: data.title, link: data.link })
     .then((res) => {
       renderCard(res, galleryWrap);
       addCardForm.close();
     })
-    .catch(console.log);
+    .catch((err) => console.log(`Error somthing went wrong. ${err}`))
+    .finally(() => {
+      addCardForm.renderLoading(false);
+    });
 });
 
-const formValidators = {
-  formAvatar: "formAvatar",
-  formImg: "formImg",
-  formProfile: "formProfile",
-};
+const formValidators = {};
+
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(".form"));
   formList.forEach((formEl) => {
@@ -129,20 +140,21 @@ const enableValidation = () => {
     validator.enableValidation();
   });
 };
-const resetAndOpenAvatarForm = () => {
+
+const resetAvatarForm = () => {
   formValidators[formAvatar.getAttribute("name")].resetValidation();
 };
-const handleAvatarSubmit = (data) => {
-  console.log(data);
-  api.editAvatar(data.url).then((res) => {
-    console.log(res);
-    userInfo.setAvatarInfo(res.avatar);
-  });
-};
-
-const resetAndOpenImgAddForm = () => {
+const resetImgAddForm = () => {
   formValidators[formImg.getAttribute("name")].resetValidation();
-  addCardForm.open();
+};
+const handleAvatarSubmit = (data) => {
+  api
+    .editAvatar(data.url)
+    .then((res) => {
+      userInfo.setAvatarInfo(res.avatar);
+    })
+    .catch((err) => console.log(`Error somthing went wrong. ${err}`))
+    .finally(() => {});
 };
 
 const handleProfileFormInputs = () => {
@@ -173,18 +185,21 @@ const profileAvatar = new PopupWithForm(avatarPopup, (data) => {
   handleAvatarSubmit(data);
 });
 
-addCardForm.setEventListeners();
-
 //listeners//////////
 /////////////////////
 
-openImgAddPopup.addEventListener("click", () => resetAndOpenImgAddForm());
+openImgAddPopup.addEventListener("click", () => {
+  resetImgAddForm();
+  addCardForm.setEventListeners();
+  addCardForm.open();
+});
 
 openProfilePopup.addEventListener("click", () => {
   resetAndOpenProfileForm();
 });
 profileAvatar.setEventListeners();
+
 openAvatarPopup.addEventListener("click", () => {
-  resetAndOpenAvatarForm();
+  resetAvatarForm();
   profileAvatar.open();
 });

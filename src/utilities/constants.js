@@ -1,3 +1,4 @@
+import Api from "../components/Api";
 const galleryWrap = ".gallery";
 const avatarPopup = ".popup_type_avatar";
 const addCardPopup = ".popup_type_card";
@@ -15,9 +16,7 @@ const profileSpanArray = {
 
 const openProfilePopup = document.querySelector(".text__edit");
 const openImgAddPopup = document.querySelector(".top__plus-box");
-const openAvatarPopup = document.querySelector(
-  ".top__container_image-container"
-);
+const openAvatarPopup = document.querySelector(".top__container-image");
 //settings
 const settings = {
   inputSelector: ".fieldset__input",
@@ -28,6 +27,17 @@ const settings = {
 };
 let userId;
 let sectionNew = "";
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
+
+  headers: {
+    authorization: "6efb715f-3f27-47aa-b11b-00d476bb80a2",
+
+    "Content-Type": "application/json",
+  },
+});
+
 export {
   galleryWrap,
   avatarPopup,
@@ -45,4 +55,5 @@ export {
   settings,
   userId,
   sectionNew,
+  api,
 };

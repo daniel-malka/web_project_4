@@ -55,12 +55,15 @@ export class Card {
     }
   }
 
-  createCard() {
-    this._cardElement = document
+  _generateCard() {
+    return (this._cardElement = document
       .querySelector(this._templateElement)
       .content.querySelector(".gallery__item")
-      .cloneNode(true);
+      .cloneNode(true));
+  }
 
+  createCard() {
+    this._cardElement = this._generateCard();
     this._galleryImg = this._cardElement.querySelector(".gallery__img");
     this._galleryText = this._cardElement.querySelector(".desc__text");
     this._deleteCard = this._cardElement.querySelector(".gallery__bin");
