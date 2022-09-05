@@ -35,7 +35,12 @@ export class FormValidator {
       this._hideInputError(input);
     });
   };
-
+  
+  _enableButton() {
+    const { buttonDisable } = this._settings;
+    this._buttonEl.classList.remove(buttonDisable);
+    this._buttonEl.disabled = false;
+  }
   _disableButton = () => {
     const { buttonDisable } = this._settings;
     this._buttonEl.classList.add(buttonDisable);
@@ -72,8 +77,7 @@ export class FormValidator {
     const isInputsValid = this._checkFormValidity();
 
     if (isInputsValid) {
-      this._buttonEl.classList.remove(buttonDisable);
-      this._buttonEl.disabled = false;
+      this._enableButton();
     } else {
       this._disableButton();
     }

@@ -116,7 +116,6 @@ const createCard = (data) => {
 };
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
-  addCardForm.renderLoading(true);
   api
     .addCard({ name: data.title, link: data.link })
     .then((res) => {
@@ -182,6 +181,7 @@ const profileForm = new PopupWithForm(profilePopup, submitProfileFormInputs);
 profileForm.setEventListeners();
 
 const profileAvatar = new PopupWithForm(avatarPopup, (data) => {
+  console.log(data);
   handleAvatarSubmit(data);
 });
 

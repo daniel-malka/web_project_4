@@ -41,6 +41,7 @@ export default class Api {
       }),
     });
   }
+
   editAvatar(avatar) {
     return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
@@ -50,18 +51,21 @@ export default class Api {
       }),
     });
   }
+
   deleteCard(cardId) {
     return this._customFetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE",
     });
   }
+
   dislikeCard(id) {
     return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "DELETE",
     });
   }
+
   likeCard(id) {
     return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,

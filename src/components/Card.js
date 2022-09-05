@@ -23,25 +23,31 @@ export class Card {
   isLiked() {
     return this._likes.some((like) => like._id == this._userId);
   }
+
   getId() {
     return this._id;
   }
+
   removeCard = () => this._cardElement.remove();
 
   _setEventListeners() {
     this._deleteCard.addEventListener("click", () =>
       this._handleDelete(this._id)
     );
+
     this._likeCard.addEventListener("click", () =>
       this._handleLikeButton(this._id)
     );
+
     this._galleryImg.addEventListener("click", () =>
       this._handleCardClick(this._name, this._link)
     );
   }
+
   addLike() {
     this._likeCard.classList.add("button_liked");
   }
+  
   removeLike() {
     this._likeCard.classList.remove("button_liked");
   }
