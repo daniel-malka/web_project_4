@@ -196,13 +196,15 @@ const profileAvatar = new PopupWithForm(avatarPopup, (data) => {
 
 openImgAddPopup.addEventListener("click", () => {
   resetImgAddForm();
-  addCardForm.setEventListeners();
+
   addCardForm.open();
 });
+addCardForm.setEventListeners();
 
 openProfilePopup.addEventListener("click", () => {
   resetAndOpenProfileForm();
 });
+
 profileAvatar.setEventListeners();
 
 openAvatarPopup.addEventListener("click", () => {
