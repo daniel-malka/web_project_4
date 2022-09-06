@@ -18,7 +18,7 @@ export class UserInfo {
     this._userAbout.textContent = aboutInput;
   }
 
-  setAvatarInfo(avatarInput) {
+  setAvatar(avatarInput) {
     this._userAvatar.src = avatarInput;
   }
 }

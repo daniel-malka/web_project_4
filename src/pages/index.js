@@ -49,16 +49,16 @@ Promise.all([api.getUserInfo(), api.getCards()])
       nameInput: userData.name,
       aboutInput: userData.about,
     });
-    userInfo.setAvatarInfo(userData.avatar);
+    userInfo.setAvatar(userData.avatar);
     section.renderInitialItems(cardsData);
   })
   .catch((err) => console.log(`Error somthing went wrong. ${err}`));
 
 const submitProfileFormInputs = (data) => {
+  profileForm.renderLoading(true, " Adding...");
   api
     .setUserInfo({ name: data.name, about: data.about, avatar: data.avatar })
     .then((data) => {
-      console.log(data.avatar);
       userInfo.setUserInfo({
         nameInput: data.name,
         aboutInput: data.about,
@@ -68,7 +68,9 @@ const submitProfileFormInputs = (data) => {
       profileForm.close();
     })
     .catch((err) => console.log(`Error somthing went wrong. ${err}`))
-    .finally(() => {});
+    .finally(() => {
+      profileForm.renderLoading(false);
+    });
 };
 
 const createCard = (data) => {
@@ -116,6 +118,7 @@ const createCard = (data) => {
 };
 
 const addCardForm = new PopupWithForm(addCardPopup, (data) => {
+  addCardForm.renderLoading(true, "Saving...");
   api
     .addCard({ name: data.title, link: data.link })
     .then((res) => {
@@ -147,13 +150,16 @@ const resetImgAddForm = () => {
   formValidators[formImg.getAttribute("name")].resetValidation();
 };
 const handleAvatarSubmit = (data) => {
+  profileAvatar.renderLoading(true, "Changing...");
   api
     .editAvatar(data.url)
     .then((res) => {
-      userInfo.setAvatarInfo(res.avatar);
+      userInfo.setAvatar(res.avatar);
     })
     .catch((err) => console.log(`Error somthing went wrong. ${err}`))
-    .finally(() => {});
+    .finally(() => {
+      profileAvatar.renderLoading(false);
+    });
 };
 
 const handleProfileFormInputs = () => {
@@ -181,8 +187,8 @@ const profileForm = new PopupWithForm(profilePopup, submitProfileFormInputs);
 profileForm.setEventListeners();
 
 const profileAvatar = new PopupWithForm(avatarPopup, (data) => {
-  console.log(data);
   handleAvatarSubmit(data);
+  profileAvatar.close();
 });
 
 //listeners//////////

@@ -35,7 +35,6 @@ export class FormValidator {
       this._hideInputError(input);
     });
   };
-  
   _enableButton() {
     const { buttonDisable } = this._settings;
     this._buttonEl.classList.remove(buttonDisable);
