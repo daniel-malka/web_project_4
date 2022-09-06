@@ -47,7 +47,7 @@ export class Card {
   addLike() {
     this._likeCard.classList.add("button_liked");
   }
-  
+
   removeLike() {
     this._likeCard.classList.remove("button_liked");
   }
@@ -55,7 +55,7 @@ export class Card {
   setLikes(newLikes) {
     this._likes = newLikes;
     const likesAmount = this._likes.length;
-    this._cardElement.querySelector(".like__counter").textContent = likesAmount;
+    this._counterLikes.textContent = likesAmount;
     if (this._owner !== this._userId) {
       this._deleteCard.style.display = "none";
     }
@@ -74,6 +74,7 @@ export class Card {
     this._galleryText = this._cardElement.querySelector(".desc__text");
     this._deleteCard = this._cardElement.querySelector(".gallery__bin");
     this._likeCard = this._cardElement.querySelector(".like__button");
+    this._counterLikes = this._cardElement.querySelector(".like__counter"); 
     this._galleryText.textContent = this._name;
     this._galleryImg.src = this._link;
 
