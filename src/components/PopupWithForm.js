@@ -10,14 +10,6 @@ export class PopupWithForm extends Popup {
     this._inputs = Array.from(this._form.querySelectorAll(".fieldset__input"));
   }
 
-  showLoading() {
-    this._buttonText = this._loadingButtonText;
-  }
-
-  hideLoading() {
-    this._submitButton.textContent = this._buttonText.textContent;
-  }
-
   _getInputValues() {
     const values = {};
 

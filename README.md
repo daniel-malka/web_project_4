@@ -1,4 +1,3 @@
-Overview
 Intro
 Description
 Project features

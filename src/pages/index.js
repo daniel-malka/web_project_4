@@ -64,8 +64,8 @@ const submitProfileFormInputs = (data) => {
         aboutInput: data.about,
         avatarInput: data.avatar,
       });
-      userInfo.setAvatarInfo(data.avatar);
       profileForm.close();
+      userInfo.setAvatarInfo(data.avatar);
     })
     .catch((err) => console.log(`Error somthing went wrong. ${err}`))
     .finally(() => {
@@ -87,7 +87,6 @@ const createCard = (data) => {
           .dislikeCard(id)
           .then((res) => {
             card.setLikes(res.likes);
-            card.removeLike();
           })
           .catch((err) => console.log(`Error somthing went wrong. ${err}`));
       } else {
@@ -95,7 +94,6 @@ const createCard = (data) => {
           .likeCard(id)
           .then((res) => {
             card.setLikes(res.likes);
-            card.addLike();
           })
           .catch((err) => console.log(`Error somthing went wrong. ${err}`));
       }
@@ -103,6 +101,7 @@ const createCard = (data) => {
     (cardId) => {
       confirmPopup.open();
       confirmPopup.setAction(() => {
+        confirmPopup.renderLoading(true, "Deleting...");
         api
           .deleteCard(cardId)
           .then((res) => {
@@ -110,7 +109,9 @@ const createCard = (data) => {
             confirmPopup.close();
           })
           .catch((err) => console.log(`Error somthing went wrong. ${err}`))
-          .finally(() => {});
+          .finally(() => {
+            confirmPopup.renderLoading(false);
+          });
       });
     }
   );
@@ -143,7 +144,7 @@ const enableValidation = () => {
   });
 };
 
-const resetAvatarForm = () => {
+const resetAvatarFormValidation = () => {
   formValidators[formAvatar.getAttribute("name")].resetValidation();
 };
 const resetImgAddForm = () => {
@@ -208,6 +209,6 @@ openProfilePopup.addEventListener("click", () => {
 profileAvatar.setEventListeners();
 
 openAvatarPopup.addEventListener("click", () => {
-  resetAvatarForm();
+  resetAvatarFormValidation();
   profileAvatar.open();
 });
