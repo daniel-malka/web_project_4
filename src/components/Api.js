@@ -1,11 +1,18 @@
 export default class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
-    this._headers = settings.headers;
   }
+  _headers() {
+    return {
+      headers: {
+        authorization: "6efb715f-3f27-47aa-b11b-00d476bb80a2",
 
-  _customFetch(url, headers) {
-    return fetch(url, headers).then((res) =>
+        "Content-Type": "application/json",
+      },
+    };
+  }
+  _customFetch(url) {
+    return fetch(url, this._headers).then((res) =>
       res.ok ? res.json() : Promise.reject(res.statusText)
     );
   }
