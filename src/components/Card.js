@@ -58,8 +58,7 @@ export class Card {
   setLikes(newLikes) {
     this._likes = newLikes;
     console.log(this._owner, "owner", this._userId, "userId");
-    const likesAmount = this._likes.length;
-    this._counterLikes.textContent = likesAmount;
+
     this._renderLikes();
   }
   _hideDeleteButton() {
@@ -73,6 +72,8 @@ export class Card {
     } else {
       this._removeLike();
     }
+    const likesAmount = this._likes.length;
+    this._counterLikes.textContent = likesAmount;
   }
   _generateCard() {
     return (this._cardElement = document
@@ -90,7 +91,6 @@ export class Card {
     this._counterLikes = this._cardElement.querySelector(".like__counter");
     this._galleryText.textContent = this._name;
     this._galleryImg.src = this._link;
-
     this._galleryImg.alt = this._alt;
     this._renderLikes();
     this._hideDeleteButton();
