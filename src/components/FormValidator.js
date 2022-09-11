@@ -48,24 +48,24 @@ export class FormValidator {
 
   _showInputError = (inputEl, errorMessage) => {
     const { inputErrorClass, spanErrorClass } = this._settings;
-    this._errorElement = this._formElement.querySelector(
+    const errorElement = this._formElement.querySelector(
       `.fieldset__error-type-${inputEl.id}`
     );
 
     inputEl.classList.add(inputErrorClass);
-    this._errorElement.textContent = errorMessage;
-    this._errorElement.classList.add(spanErrorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(spanErrorClass);
   };
 
   _hideInputError = (inputEl) => {
     const { inputErrorClass, spanErrorClass } = this._settings;
-    this._errorElement = this._formElement.querySelector(
+    const errorElement = this._formElement.querySelector(
       `.fieldset__error-type-${inputEl.id}`
     );
 
     inputEl.classList.remove(inputErrorClass);
-    this._errorElement.classList.remove(spanErrorClass);
-    this._errorElement.textContent = "";
+    errorElement.classList.remove(spanErrorClass);
+    errorElement.textContent = "";
   };
 
   _checkFormValidity = () =>

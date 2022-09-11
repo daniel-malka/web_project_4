@@ -1,22 +1,24 @@
 export default class Api {
   constructor({ baseUrl, headers }) {
-    console.log(baseUrl);
     this._baseUrl = baseUrl;
     this._headers = headers;
+  }
+  _checkAndConvertRes(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(res.status);
+    }
   }
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   setUserInfo({ name, about }) {
@@ -27,9 +29,7 @@ export default class Api {
         name: name,
         about: about,
       }),
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   addCard({ name, link }) {
@@ -40,9 +40,7 @@ export default class Api {
         name: name,
         link: link,
       }),
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   editAvatar(avatar) {
@@ -52,35 +50,27 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE",
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   dislikeCard(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "DELETE",
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 
   likeCard(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
+    }).then(this._checkAndConvertRes);
   }
 }

@@ -57,8 +57,6 @@ export class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    console.log(this._owner, "owner", this._userId, "userId");
-
     this._renderLikes();
   }
   _hideDeleteButton() {
